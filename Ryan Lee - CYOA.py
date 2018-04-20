@@ -378,13 +378,13 @@ class Inventory(Character):
         super(Inventory, self). __init__(None, None, None, Inventory, None)
         self.inventory = inventory
 
-    inventory = 0
-    if command == "test":
-        print("You picked up the item.")
-        print(1 + + inventory)
+        inventory = 0
+        if command == "test":
+            print("You picked up the item.")
+            print(1 + + inventory)
 
-    if inventory == 15:
-        print("You cannot pick anymore items.")
+        if inventory == 15:
+            print("You cannot pick anymore items.")
 
 
 while False:  # FIX
@@ -440,7 +440,7 @@ kitchen = Room("Kitchen", None, None, 'room2', None, None, None,
                "You entered a kitchen, there is also a table.")
 
 hallway1 = Room("Hallway 1", "front_house", 'bedroom1', 'bedroom2', 'room2', 'house_f2', None,
-                "You are in a hallway.  There's a room to the east, west, and stairs that goes up."
+                "You are in a hallway.  There's a room to the east, west, and there is a stair case that goes up."
                 "  There's also a door to the north.")
 
 bedroom1 = Room("Bedroom 1", None, None, 'hallway1', None, None, None,
@@ -455,14 +455,21 @@ inside_shelter = Room("Inside of Shelter", "craft", None, 'shelter', None, None,
 craft = Room("Crafting Station", None, None, None, 'inside_shelter', None, None,
              "You are in a room; it seems to be a crafting station.")
 
-house_f2 = Room("House F2", None, None, None, None, 'attic', 'hallway1',
-                "You entered in a room and there's a ladder, there's a way down the stairs to the south.")
+house_f2 = Room("House F2", None, "room3", None, None, None, 'hallway1',
+                "You appeared at the top of the stair case and there's a room to the west.")
 
-attic = Room("Attic 1", 'attic2', None, None, None, None, "house_f2",
+room3 = Room("Room 3", None, None, "house_f2", None, "attic", "underground", "You are in a room, there's a door to "
+                                                                             "the east"
+                                                                             " and a ladder that goes up and down.")
+
+underground = Room("Sewer 1", 'attic2', None, None, None, "room3", None,
+                   "You are in an underground place.  There's a path to the south.")
+
+attic = Room("Attic 1", 'attic2', None, None, None, None, "room3",
              "You appeared in an attic; nothing is near you.")
 
 attic2 = Room("Attic 2", 'front_house', None, None, 'attic', None, None,
-              "You are in an attic with a window to the window.")
+              "You are near a window.")
 
 front_house = Room("Front of House", "road", None, None, "hallway1", None, None,
                    "You appeared on the front side of your house with a road to the north.  There's also a door to"
