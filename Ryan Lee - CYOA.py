@@ -499,10 +499,7 @@ front_house = Room("Front of House", "road", None, None, "hallway1", None, None,
                    " the south which is the front entrance of the house.", None)
 
 road = Room("Endless Road (look)", None, None, None, None, None, None, "You walked endlessly, but you did not survive."
-                                                                       "(You have already lost...)", None)
-
-
-# END GAME
+                                                                       "(You lose...)", None)
 
 
 current_node = outside
