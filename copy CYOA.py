@@ -8,23 +8,6 @@ print("Type (help) to look at the guide.")
 print()
 
 
-class Room(object):
-    def __init__(self, name, north, west, east, south, up, down, look, items):
-        self.name = name
-        self.north = north
-        self.west = west
-        self.east = east
-        self.south = south
-        self.up = up
-        self.down = down
-        self.look = look
-        self.item = items
-
-    def move(self, direction):
-        global current_node
-        current_node = globals()[getattr(self, direction)]
-
-
 class Item(object):
     def __init__(self, name):
         self.name = name
@@ -205,7 +188,7 @@ class IronSword(Sword):
             print(damage)
 
 
-iron_sword = IronSword("stone sword", 30)
+stone_sword = IronSword("stone sword", 30)
 
 
 class Tool(Item):
@@ -417,53 +400,54 @@ while False:  # FIX
         global current_node
         current_node = globals()[getattr(self, direction)]
 
-inputONE = [HealthPotion, WoodShield, WoodBow, WoodSword, IronSword, IronShield, IronBow, Torch, GreenApple, GoldApple,
-            RedApple, ChainHelm, ChainChestPlate, WaterBottle]
+
+input1 = [HealthPotion, WoodShield, WoodBow, WoodSword, IronBow, IronShield, IronSword, WaterBottle, GoldApple, RedApple
+          , GreenApple, ChainChestPlate, ChainHelm, Torch]
 
 outside = Room("Outside of House", 'room1', 'shelter', 'garden', None, None, None,
                "You're outside of a house; there's a garden to the east and a shelter to the west.  There's a house"
-               " to the north.", None)
+               " to the north.", chain_chest_plate)
 
 garden = Room("Garden", None, None, None, None, None, "underground3",
-              "You're in a garden; there's nothing except dirt.", None)
+              "You're in a garden; there's nothing except dirt.", chain_helm)
 
 shelter = Room("Shelter", None, 'inside_shelter', "outside", None, None, None,
-               "You're in a shelter, there's a path to the west and a door to the east.", None)
+               "You're in a shelter, there's a path to the west and a door to the east.", apple1)
 
 room1 = Room("Entrance of House", 'room2', None, 'closet', 'outside', None, None,
              "You entered your home and you have a path to the north and a door to the east and south; there"
-             " is also a table with items.", None)
+             " is also a table.", apple2)
 
 room2 = Room("Room 2", 'hallway1', 'kitchen', None, 'room1', None, None,
-             "You're in a room and there's a path the the north, west, and south.", None)
+             "You're in a room and there's a path the the north, west, and south.", apple3)
 
 closet = Room("Closet", None, 'room1', 'secret_room', None, None, None,
-              "You're in a closet and it's very crowded.", None)
+              "You're in a closet and it's very crowded.", stone_sword)
 
 secret_room = Room("Secret Room", None, 'closet', None, None, None, None,
-                   "You entered a secret room and you see lots of scrap metal.", None)
+                   "You entered a secret room and you see lots of scrap metal.", wood_sword)
 
 kitchen = Room("Kitchen", None, None, 'room2', None, None, None,
-               "You entered a kitchen, there is also a table.", None)
+               "You entered a kitchen, there is also a table.", wood_bow)
 
 hallway1 = Room("Hallway 1", "front_house", 'bedroom1', 'bedroom2', 'room2', 'house_f2', None,
                 "You are in a hallway.  There's a room to the east, west, and there is a stair case that goes up."
-                "  There's also a door to the north.", None)
+                "  There's also a door to the north.", water_bottle)
 
 bedroom1 = Room("Bedroom 1", None, None, 'hallway1', None, None, None,
-                "You entered a room and there's lots of furniture and items.", None)
+                "You entered a room and there's lots of furniture and items.", iron_bow)
 
 bedroom2 = Room("Bedroom 2", None, 'hallway1', None, None, None, None,
-                "You entered a room and there's lots of furniture and items.", None)
+                "You entered a room and there's lots of furniture and items.", wood_defend)
 
 inside_shelter = Room("Inside of Shelter", "craft", None, 'shelter', None, None, None,
-                      "You entered a room and there is a door to the north and a path to the east.", None)
+                      "You entered a room and there is a door to the north and a path to the east.", iron_defend)
 
 craft = Room("Crafting Station", None, None, None, 'inside_shelter', None, None,
-             "You are in a room; it seems to be a crafting station.", None)
+             "You are in a room; it seems to be a crafting station.", health_potion)
 
 house_f2 = Room("House F2", None, "room3", None, None, None, 'hallway1',
-                "You appeared at the top of the stair case and there's a room to the west.", None)
+                "You appeared at the top of the stair case and there's a room to the west.", light_source)
 
 room3 = Room("Room 3", None, None, "house_f2", None, "attic", "underground", "You are in a room, there's a door to "
                                                                              "the east"
@@ -508,6 +492,23 @@ current_node = outside
 DIRECTIONS = ["north", "east", "south", "west", "up", "down"]
 short_directions = ["n", "e", "s", "w", "u", "d"]
 
+
+class Room(object):
+    def __init__(self, name, north, west, east, south, up, down, look, items):
+        self.name = name
+        self.north = north
+        self.west = west
+        self.east = east
+        self.south = south
+        self.up = up
+        self.down = down
+        self.look = look
+        self.item = items
+
+    def move(self, direction):
+        global current_node
+        current_node = globals()[getattr(self, direction)]
+
 while True:
     print(current_node.name)
     print()
@@ -517,65 +518,7 @@ while True:
         print(current_node.look)
     print(" ")
     if command == "quit":
-        quit(0)  # ADD THIS CODE TO NOT REPEAT!!!
-    if command == "pick up":  # FIX
-        item = input("Pick up what?  CHAT:>_")
-        print()
-        if item == "torch":
-            print("You picked up the torch.")
-            print()
-
-        if item == "green apple":
-            print("You picked up the green apple.")
-            print()
-
-        if item == "gold apple":
-            print("You picked up the gold apple.")
-            print()
-
-        if item == "red apple":
-            print("You picked up the red apple.")
-            print()
-
-        if item == "water bottle":
-            print("You picked up the water bottle.")
-            print()
-
-        if item == "health potion":
-            print("You picked up the health potion.")
-            print()
-
-        if item == "iron sword":
-            print("You picked up the iron sword.")
-            print()
-
-        if item == "wood sword":
-            print("You picked up the wood sword.")
-            print()
-
-        if item == "iron shield":
-            print("You picked up the iron shield.")
-            print()
-
-        if item == "wood shield":
-            print("You picked up the wood shield.")
-            print()
-
-        if item == "wood bow":
-            print("You picked up the wood bow.")
-            print()
-
-        if item == "iron bow":
-            print("You picked up the iron bow.")
-            print()
-
-        if item == "chain chest plate":
-            print("You picked up the chain chest plate.")
-            print()
-
-        if item == "chain helm":
-            print("You picked up the chain helm.")
-            print()
+        quit(0)
 
     elif command in short_directions:
         position = short_directions.index(command)
