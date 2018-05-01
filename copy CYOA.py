@@ -72,11 +72,11 @@ class ChainChestPlate(ChestPlate):
     def __init__(self, name, defense):
         super(ChainChestPlate, self). __init__(name, defense)
 
-        def wear(self):
-            print("You put on the CHAIN CHEST PLATE.")
+    def wear(self):
+        print("You put on the CHAIN CHEST PLATE.")
 
-        if command == "put on chain chest plate":
-            print(wear)
+    if command == "put on chain chest plate":
+        print(wear)
 
 
 chain_chest_plate = ChainChestPlate("chain chest plate", 35)
@@ -98,11 +98,11 @@ class WoodBow(Range):
         super(WoodBow, self). __init__(name, damage)
         self.dmg = damage
 
-        def attack(self):
-            print("You attacked with the WOOD BOW.")
+    def attack(self):
+        print("You attacked with the WOOD BOW.")
 
-        if command == "shoot with wood bow":
-            print(attack)
+    if command == "shoot with wood bow":
+        print(attack)
 
 
 wood_bow = WoodBow("wood bow", 10)
@@ -113,11 +113,11 @@ class IronBow(Range):
         super(IronBow, self). __init__(name, damage)
         self.dmg = damage
 
-        def attack(self):
-            print("You attacked with the IRON BOW.")
+    def attack(self):
+        print("You attacked with the IRON BOW.")
 
-        if command == "shoot with iron bow":
-            print(attack)
+    if command == "shoot with iron bow":
+        print(attack)
 
 
 iron_bow = IronBow("iron bow", 25)
@@ -133,19 +133,19 @@ class WoodShield(Melee):
         super(WoodShield, self). __init__(name, damage)
         self.shield = defense
 
-        if command == "pick up wood shield":
-            print("You picked the %s." % name)
+    if command == "pick up wood shield":
+        print("You picked the %s." % name)
 
-        def defense(self):
-            print("You used your wooden shield.")
+    def defense(self):
+        print("You used your wooden shield.")
 
-        def damage(self):
-            print("You attacked with the shield.")
+    def damage(self):
+        print("You attacked with the shield.")
 
-        if command == "defend with wood shield":
-            print(defense)
-        if command == "attack with wood shield":
-            print(damage)
+    if command == "defend with wood shield":
+        print(defense)
+    if command == "attack with wood shield":
+        print(damage)
 
 
 wood_defend = WoodShield("wooden shield", 30, 5)
@@ -156,16 +156,16 @@ class IronShield(Melee):
         super(IronShield, self). __init__(name, damage)
         self.shield = defense
 
-        def defense(self):
-            print("You used your iron shield.")
+    def defense(self):
+        print("You used your iron shield.")
 
-        def damage(self):
-            print("You attacked with the shield.")
+    def damage(self):
+        print("You attacked with the shield.")
 
-        if command == "defend with iron shield":
-            print(defense)
-        if command == "attack with iron shield":
-            print(damage)
+    if command == "defend with iron shield":
+        print(defense)
+    if command == "attack with iron shield":
+        print(damage)
 
 
 iron_defend = IronShield("iron shield", 55, 10)
@@ -183,11 +183,11 @@ class WoodSword(Sword):
         super(WoodSword, self). __init__(name, damage)
         self.dmg = damage
 
-        def damage(self):
-            print("You attacked with the WOOD SWORD.")
+    def damage(self):
+        print("You attacked with the WOOD SWORD.")
 
-        if command == "attack with wood sword":
-            print(damage)
+    if command == "attack with wood sword":
+        print(damage)
 
 
 wood_sword = WoodSword("wood sword", 15)
@@ -198,11 +198,11 @@ class IronSword(Sword):
         super(IronSword, self). __init__(name, damage)
         self.dmg = damage
 
-        def damage(self):
-            print("You attacked with the STONE SWORD.")
+    def damage(self):
+        print("You attacked with the STONE SWORD.")
 
-        if command == "attack with stone sword":
-            print(damage)
+    if command == "attack with stone sword":
+        print(damage)
 
 
 iron_sword = IronSword("stone sword", 30)
@@ -224,17 +224,17 @@ class Torch(LightSource):
         super(Torch, self). __init__(name)
         self.torch_light = durability
 
-        def torch_on(self):
-            print("You turned on the torch.")
+    def torch_on(self):
+        print("You turned on the torch.")
 
-        def torch_off(self):
-            print("You turned off torch.")
+    def torch_off(self):
+        print("You turned off torch.")
 
-        if command == "torch on":
-            print(torch_on)
+    if command == "torch on":
+        print(torch_on)
 
-        if command == "torch off":
-            print(torch_off)
+    if command == "torch off":
+        print(torch_off)
 
 
 light_source = Torch("torch", 100)
@@ -262,11 +262,11 @@ class HealthPotion(Container):
     def __init__(self, name, health_give):
         super(HealthPotion, self). __init__(name, health_give)
 
-        def drink(self):
-            print("You drank the potion.")
+    def drink(self):
+        print("You drank the potion.")
 
-        if command == "drink health potion":
-            print(drink)
+    if command == "drink health potion":
+        print(drink)
 
 
 health_potion = HealthPotion("health potion", 55)
@@ -276,11 +276,11 @@ class WaterBottle(Container):
     def __init__(self, name, health_give):
         super(WaterBottle, self). __init__(name, health_give)
 
-        def drink(self):
-            print("You drank the water from the bottle.")
+    def drink(self):
+        print("You drank the water from the bottle.")
 
-        if command == "drink water bottle":
-            print(drink)
+    if command == "drink water bottle":
+        print(drink)
 
 
 water_bottle = WaterBottle("water bottle", 10)
@@ -291,11 +291,11 @@ class RedApple(Food):
         super(RedApple, self). __init__(name, health_give)
         self.health = health_give
 
-        def eat(self):
-            print("You ate the RED APPLE.")
+    def eat(self):
+        print("You ate the RED APPLE.")
 
-        if command == "eat red apple":
-            print(eat)
+    if command == "eat red apple":
+        print(eat)
 
 
 apple1 = RedApple("red apple", 15)
@@ -306,11 +306,11 @@ class GreenApple(Food):
         super(GreenApple, self). __init__(name, health_give)
         self.health = health_give
 
-        def eat(self):
-            print("You ate the GREEN APPLE.")
+    def eat(self):
+        print("You ate the GREEN APPLE.")
 
-        if command == "eat green apple":
-            print(eat)
+    if command == "eat green apple":
+        print(eat)
 
 
 apple2 = GreenApple("green apple", 30)
@@ -321,11 +321,11 @@ class GoldApple(Food):
         super(GoldApple, self). __init__(name, health_give)
         self.health = health_give
 
-        def eat(self):
-            print("You ate the GOLD APPLE.")
+    def eat(self):
+        print("You ate the GOLD APPLE.")
 
-        if command == "eat gold apple":
-            print(eat)
+    if command == "eat gold apple":
+        print(eat)
 
 
 apple3 = GoldApple("gold apple", 55)
@@ -464,8 +464,8 @@ chain_chest_plate1 = ItemBuild("Chain Chest Plate", 35, None, None)
 water_bottle1 = ItemBuild("water bottle", None, None, 10)
 
 
-inputONE = [health_potion1, wood_shield1, water_bottle1, chain_chest_plate1, chain_helm1, red_apple1, green_apple1
-            , gold_apple1, torch1, wood_sword1, wood_bow1, iron_shield1, iron_bow1, iron_sword1, health_potion1]
+inputONE = [health_potion1, wood_shield1, water_bottle1, chain_chest_plate1, chain_helm1, red_apple1, green_apple1,
+            gold_apple1, torch1, wood_sword1, wood_bow1, iron_shield1, iron_bow1, iron_sword1, health_potion1]
 
 outside = Room("Outside of House", 'room1', 'shelter', 'garden', None, None, None,
                "You're outside of a house; there's a garden to the east and a shelter to the west.  There's a house"
@@ -571,64 +571,81 @@ while True:
         print()
         print("To pick up items, type (pick up).  To interact with items, type (interact).")
         print()
-    if command == "pick up":  # FIX
+    if command == "pick up":
         item = input("Pick up what?  CHAT:>_")
         print()
-        if item == "torch":
-            print("You picked up the torch.")
-            print()
+        if inputONE not in current_node:
+            print("That item is not in the room.")
+        if inputONE in current_node:
+            if item == "torch":
+                print("You picked up the torch.")
+                print()
 
-        if item == "green apple":
-            print("You picked up the green apple.")
-            print()
+            if item == "green apple":
+                print("You picked up the green apple.")
+                print()
 
-        if item == "gold apple":
-            print("You picked up the gold apple.")
-            print()
+            if item == "gold apple":
+                print("You picked up the gold apple.")
+                print()
 
-        if item == "red apple":
-            print("You picked up the red apple.")
-            print()
+            if item == "red apple":
+                print("You picked up the red apple.")
+                print()
 
-        if item == "water bottle":
-            print("You picked up the water bottle.")
-            print()
+            if item == "water bottle":
+                print("You picked up the water bottle.")
+                print()
 
-        if item == "health potion":
-            print("You picked up the health potion.")
-            print()
+            if item == "health potion":
+                print("You picked up the health potion.")
+                print()
 
-        if item == "iron sword":
-            print("You picked up the iron sword.")
-            print()
+            if item == "iron sword":
+                print("You picked up the iron sword.")
+                print()
 
-        if item == "wood sword":
-            print("You picked up the wood sword.")
-            print()
+            if item == "wood sword":
+                print("You picked up the wood sword.")
+                print()
 
-        if item == "iron shield":
-            print("You picked up the iron shield.")
-            print()
+            if item == "iron shield":
+                print("You picked up the iron shield.")
+                print()
 
-        if item == "wood shield":
-            print("You picked up the wood shield.")
-            print()
+            if item == "wood shield":
+                print("You picked up the wood shield.")
+                print()
 
-        if item == "wood bow":
-            print("You picked up the wood bow.")
-            print()
+            if item == "wood bow":
+                print("You picked up the wood bow.")
+                print()
 
-        if item == "iron bow":
-            print("You picked up the iron bow.")
-            print()
+            if item == "iron bow":
+                print("You picked up the iron bow.")
+                print()
 
-        if item == "chain chest plate":
-            print("You picked up the chain chest plate.")
-            print()
+            if item == "chain chest plate":
+                print("You picked up the chain chest plate.")
+                print()
 
-        if item == "chain helm":
-            print("You picked up the chain helm.")
-            print()
+            if item == "chain helm":
+                print("You picked up the chain helm.")
+                print()
+
+    class Interact(object):
+        def __init__(self, eat, hit, drop, shoot):
+            self.eat = eat
+            self.hit = hit
+            self.drop = drop
+            self.shoot = shoot
+
+            eat = Interact("eat", None, None, None)
+            hit = Interact(None, "hit", None, None)
+            drop = Interact(None, None, "drop", None)
+            shoot = Interact(None, None, None, "shoot")
+
+            interact = [eat, hit, drop, shoot]
 
     if command == "interact":  # FIX
         item = input("Interact what?  CHAT:>_")
