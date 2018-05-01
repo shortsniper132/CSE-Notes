@@ -413,8 +413,59 @@ while False:  # FIX
         global current_node
         current_node = globals()[getattr(self, direction)]
 
-inputONE = [HealthPotion, WoodShield, WoodBow, WoodSword, IronSword, IronShield, IronBow, Torch, GreenApple, GoldApple,
-            RedApple, ChainHelm, ChainChestPlate, WaterBottle]
+
+class ItemBuild(object):
+    def __init__(self, name, defense, damage, health_give):
+        self.name = name
+        self.defense = defense
+        self.damage = damage
+        self.health_give = health_give
+
+
+health_potion1 = ItemBuild("Health Potion", None, None, 55)
+
+
+wood_shield1 = ItemBuild("Wood Shield", 30, 5, None)
+
+
+wood_sword1 = ItemBuild("Wood Sword", None, 15, None)
+
+
+iron_sword1 = ItemBuild("Iron Sword", None, 30, None)
+
+
+iron_shield1 = ItemBuild("Iron Shield", 55, 10, None)
+
+
+iron_bow1 = ItemBuild("Iron Bow", None, 25, None)
+
+
+wood_bow1 = ItemBuild("Wood Bow", None, 10, None)
+
+
+torch1 = ItemBuild("Torch", None, None, None)
+
+
+green_apple1 = ItemBuild("Green Apple", None, None, 30)
+
+
+gold_apple1 = ItemBuild("Gold Apple", None, None, 55)
+
+
+red_apple1 = ItemBuild("Red Apple", None, None, 15)
+
+
+chain_helm1 = ItemBuild("Chain Helm", 25, None, None)
+
+
+chain_chest_plate1 = ItemBuild("Chain Chest Plate", 35, None, None)
+
+
+water_bottle1 = ItemBuild("water bottle", None, None, 10)
+
+
+inputONE = [health_potion1, wood_shield1, water_bottle1, chain_chest_plate1, chain_helm1, red_apple1, green_apple1,
+            gold_apple1, torch1, wood_sword1, wood_bow1, iron_shield1, iron_bow1, iron_sword1, health_potion1]
 
 outside = Room("Outside of House", 'room1', 'shelter', 'garden', None, None, None,
                "You're outside of a house; there's a garden to the east and a shelter to the west.  There's a house"
@@ -578,6 +629,20 @@ while True:
         if item == "chain helm":
             print("You picked up the chain helm.")
             print()
+
+    class Interact(object):
+        def __init__(self, eat, hit, drop, shoot):
+            self.eat = eat
+            self.hit = hit
+            self.drop = drop
+            self.shoot = shoot
+
+    eat = Interact()
+    hit = Interact()
+    drop = Interact()
+    shoot = Interact()
+
+    interact = [eat, hit, drop, shoot]
 
     if command == "interact":  # FIX
         item = input("Interact what?  CHAT:>_")
