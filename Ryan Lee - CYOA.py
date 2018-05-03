@@ -1,6 +1,3 @@
-#  Add, if item is not in room, or non-exist, make (CANNOT PICK UP)
-#  Add items into room.
-
 command = input
 
 
@@ -9,7 +6,7 @@ print()
 
 
 class Room(object):
-    def __init__(self, name, north, west, east, south, up, down, look, input1):
+    def __init__(self, name, north, west, east, south, up, down, look, battle_mode, evade, attack, shop):
         self.name = name
         self.north = north
         self.west = west
@@ -18,7 +15,10 @@ class Room(object):
         self.up = up
         self.down = down
         self.look = look
-        self.input1 = input1
+        self.evade = evade
+        self.attack = attack
+        self.shop = shop
+        self.battle = battle_mode
 
     def move(self, direction):
         global current_node
@@ -33,211 +33,161 @@ class Item(object):
         print("You picked up the %s." % self.name)
 
 
-class Armor(Item):
-    def __init__(self, name, defense):
-        super(Armor, self).__init__(name)
-        self.helmet = defense
-        self.chest_plate_armor = defense
-
-
-class Helm(Armor):
-    def __init__(self, name, defense):
-        super(Helm, self). __init__(name, defense)
-        self.chain_helm1 = name
-        self.chain_helm2 = defense
-
-
-class ChainHelm(Helm):
-    def __init__(self, name, defense):
-        super(ChainHelm, self). __init__(name, defense)
-
-        def wear(self):
-            print("You put on the CHAIN HELM.")
-
-        if command == "put on chain helm":
-            print(wear)
-
-
-chain_helm = ChainHelm("chain helmet", 25)
-
-
-class ChestPlate(Armor):
-    def __init__(self, name, defense):
-        super(ChestPlate, self). __init__(name, defense)
-        self.chain_armor1 = name
-        self.chain_armor2 = defense
-
-
-class ChainChestPlate(ChestPlate):
-    def __init__(self, name, defense):
-        super(ChainChestPlate, self). __init__(name, defense)
-
-    def wear(self):
-        print("You put on the CHAIN CHEST PLATE.")
-
-    if command == "put on chain chest plate":
-        print(wear)
-
-
-chain_chest_plate = ChainChestPlate("chain chest plate", 35)
-
-
 class Weapon(Item):
-    def __init__(self, name, damage):
+    def __init__(self, name, damage, cost):
         super(Weapon, self). __init__(name)
         self.dmg = damage
+        self.cost = cost
 
 
-class Range(Weapon):
-    def __init__(self, name, damage):
-        super(Range, self). __init__(name, damage)
-
-
-class WoodBow(Range):
-    def __init__(self, name, damage):
-        super(WoodBow, self). __init__(name, damage)
+class WoodenSword(Weapon):
+    def __init__(self, name, damage, cost):
+        super(WoodenSword, self). __init__(name, damage, cost)
         self.dmg = damage
-
-    def attack(self):
-        print("You attacked with the WOOD BOW.")
-
-    if command == "shoot with wood bow":
-        print(attack)
+        self.cost = cost
 
 
-wood_bow = WoodBow("wood bow", 10)
+wooden_sword = WoodenSword("wooden sword", 5, None)
 
 
-class IronBow(Range):
-    def __init__(self, name, damage):
-        super(IronBow, self). __init__(name, damage)
+class StoneSword(Weapon):
+    def __init__(self, name, damage, cost):
+        super(StoneSword, self). __init__(name, damage, cost)
         self.dmg = damage
-
-    def attack(self):
-        print("You attacked with the IRON BOW.")
-
-    if command == "shoot with iron bow":
-        print(attack)
+        self.cost = cost
 
 
-iron_bow = IronBow("iron bow", 25)
+stone_sword = StoneSword("stone sword", 15, 25)
 
 
-class Melee(Weapon):
-    def __init__(self, name, damage):
-        super(Melee, self). __init__(name, damage)
-
-
-class WoodShield(Melee):
-    def __init__(self, name, defense, damage):
-        super(WoodShield, self). __init__(name, damage)
-        self.shield = defense
-
-    if command == "pick up wood shield":
-        print("You picked the %s." % name)
-
-    def defense(self):
-        print("You used your wooden shield.")
-
-    def damage(self):
-        print("You attacked with the shield.")
-
-    if command == "defend with wood shield":
-        print(defense)
-    if command == "attack with wood shield":
-        print(damage)
-
-
-wood_defend = WoodShield("wooden shield", 30, 5)
-
-
-class IronShield(Melee):
-    def __init__(self, name, defense, damage):
-        super(IronShield, self). __init__(name, damage)
-        self.shield = defense
-
-    def defense(self):
-        print("You used your iron shield.")
-
-    def damage(self):
-        print("You attacked with the shield.")
-
-    if command == "defend with iron shield":
-        print(defense)
-    if command == "attack with iron shield":
-        print(damage)
-
-
-iron_defend = IronShield("iron shield", 55, 10)
-
-
-class Sword(Melee):
-    def __init__(self, name, damage):
-        super(Sword, self). __init__(name, damage)
-        self.name = name
+class IronSword(Weapon):
+    def __init__(self, name, damage, cost):
+        super(IronSword, self). __init__(name, damage, cost)
         self.dmg = damage
+        self.cost = cost
 
 
-class WoodSword(Sword):
-    def __init__(self, name, damage):
-        super(WoodSword, self). __init__(name, damage)
+iron_sword = IronSword("iron sword", 25, 50)
+
+
+class BoneSword(Weapon):
+    def __init__(self, name, damage, cost):
+        super(BoneSword, self). __init__(name, damage, cost)
         self.dmg = damage
-
-    def damage(self):
-        print("You attacked with the WOOD SWORD.")
-
-    if command == "attack with wood sword":
-        print(damage)
+        self.cost = cost
 
 
-wood_sword = WoodSword("wood sword", 15)
+bone_sword = BoneSword("bone sword", 40, 75)
 
 
-class IronSword(Sword):
-    def __init__(self, name, damage):
-        super(IronSword, self). __init__(name, damage)
+class AxeOfFlame(Weapon):
+    def __init__(self, name, damage, cost):
+        super(AxeOfFlame, self). __init__(name, damage, cost)
         self.dmg = damage
-
-    def damage(self):
-        print("You attacked with the STONE SWORD.")
-
-    if command == "attack with stone sword":
-        print(damage)
+        self.cost = cost
 
 
-iron_sword = IronSword("stone sword", 30)
+axe_of_flame = AxeOfFlame("axe of flame", 55, 100)
 
 
-class Tool(Item):
-    def __init__(self, name):
-        super(Tool, self). __init__(name)
-        self.name = name
+class ChillingSpear(Weapon):
+    def __init__(self, name, damage, cost):
+        super(ChillingSpear, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
 
 
-class LightSource(Tool):
-    def __init__(self, name):
-        super(LightSource, self). __init__(name)
+chilling_spear = ChillingSpear("chilling spear", 65, 175)
 
 
-class Torch(LightSource):
-    def __init__(self, name, durability):
-        super(Torch, self). __init__(name)
-        self.torch_light = durability
-
-    def torch_on(self):
-        print("You turned on the torch.")
-
-    def torch_off(self):
-        print("You turned off torch.")
-
-    if command == "torch on":
-        print(torch_on)
-
-    if command == "torch off":
-        print(torch_off)
+class LegendarySword(Weapon):
+    def __init__(self, name, damage, cost):
+        super(LegendarySword, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
 
 
-light_source = Torch("torch", 100)
+legendary_sword = LegendarySword("iron sword", 80, 300)
+
+
+class Lurker(Weapon):
+    def __init__(self, name, damage, cost):
+        super(Lurker, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+lurker = Lurker("lurker", 100, 400)
+
+
+class FreezingRapier(Weapon):
+    def __init__(self, name, damage, cost):
+        super(FreezingRapier, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+freezing_rapier = FreezingRapier("freezing rapier", 135, 480)
+
+
+class GreatAxe(Weapon):
+    def __init__(self, name, damage, cost):
+        super(GreatAxe, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+great_axe = GreatAxe("great axe", 150, 530)
+
+
+class Blazer(Weapon):
+    def __init__(self, name, damage, cost):
+        super(Blazer, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+blazer = Blazer("blazer", 180, 690)
+
+
+class BigFlame(Weapon):
+    def __init__(self, name, damage, cost):
+        super(BigFlame, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+big_flame = BigFlame("big flame", 230, 690)
+
+
+class LegendaryAxe(Weapon):
+    def __init__(self, name, damage, cost):
+        super(LegendaryAxe, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+legendary_axe = LegendaryAxe("legendary axe", 270, 800)
+
+
+class InfinityScythe(Weapon):
+    def __init__(self, name, damage, cost):
+        super(InfinityScythe, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+infinity_scythe = InfinityScythe("infinity scythe", 350, 1000)
+
+
+class ShadowBlade(Weapon):
+    def __init__(self, name, damage, cost):
+        super(ShadowBlade, self). __init__(name, damage, cost)
+        self.dmg = damage
+        self.cost = cost
+
+
+shadow_blade = ShadowBlade("shadow blade", 500, 2000)
 
 
 class Consumable(Item):
@@ -246,89 +196,52 @@ class Consumable(Item):
         self.name = name
 
 
-class Food(Consumable):
-    def __init__(self, name, health_give):
-        super(Food, self).__init__(name)
-        self.health = health_give
-
-
 class Container(Consumable):
-    def __init__(self, name, health_give):
+    def __init__(self, name, health_give, cost):
         super(Container, self). __init__(name)
         self.health = health_give
+        self.cost = cost
 
 
-class HealthPotion(Container):
-    def __init__(self, name, health_give):
-        super(HealthPotion, self). __init__(name, health_give)
-
-    def drink(self):
-        print("You drank the potion.")
-
-    if command == "drink health potion":
-        print(drink)
+class HealthP(Container):
+    def __init__(self, name, health_give, cost):
+        super(HealthP, self). __init__(name, health_give, cost)
 
 
-health_potion = HealthPotion("health potion", 55)
+health_p = HealthP("health potion", 15, 15)
 
 
-class WaterBottle(Container):
-    def __init__(self, name, health_give):
-        super(WaterBottle, self). __init__(name, health_give)
-
-    def drink(self):
-        print("You drank the water from the bottle.")
-
-    if command == "drink water bottle":
-        print(drink)
+class SuperHealthP(Container):
+    def __init__(self, name, health_give, cost):
+        super(SuperHealthP, self). __init__(name, health_give, cost)
 
 
-water_bottle = WaterBottle("water bottle", 10)
+super_health_p = SuperHealthP("super health potion", 50, 50)
 
 
-class RedApple(Food):
-    def __init__(self, name, health_give):
-        super(RedApple, self). __init__(name, health_give)
+class Food(Consumable):
+    def __init__(self, name, health_give, cost):
+        super(Food, self).__init__(name)
+        self.health = health_give
+        self.cost = cost
+
+
+class Bread(Food):
+    def __init__(self, name, health_give, cost):
+        super(Bread, self). __init__(name, health_give, cost)
         self.health = health_give
 
-    def eat(self):
-        print("You ate the RED APPLE.")
 
-    if command == "eat red apple":
-        print(eat)
+bread = Bread("bread", 7, 7)
 
 
-apple1 = RedApple("red apple", 15)
-
-
-class GreenApple(Food):
-    def __init__(self, name, health_give):
-        super(GreenApple, self). __init__(name, health_give)
+class Apple(Food):
+    def __init__(self, name, health_give, cost):
+        super(Apple, self). __init__(name, health_give, cost)
         self.health = health_give
 
-    def eat(self):
-        print("You ate the GREEN APPLE.")
 
-    if command == "eat green apple":
-        print(eat)
-
-
-apple2 = GreenApple("green apple", 30)
-
-
-class GoldApple(Food):
-    def __init__(self, name, health_give):
-        super(GoldApple, self). __init__(name, health_give)
-        self.health = health_give
-
-    def eat(self):
-        print("You ate the GOLD APPLE.")
-
-    if command == "eat gold apple":
-        print(eat)
-
-
-apple3 = GoldApple("gold apple", 55)
+apple = Apple("apple", 5, 5)
 
 
 # LINE
@@ -422,106 +335,55 @@ class ItemBuild(object):
         self.health_give = health_give
 
 
-input1 = [HealthPotion, WoodSword, WaterBottle, WoodBow, WoodShield, IronBow,
-          IronShield, IronSword, RedApple, GoldApple, RedApple, Torch,
-          ChainChestPlate, ChainHelm]
+shop_item = [StoneSword, IronSword, BoneSword, AxeOfFlame, ChillingSpear, LegendarySword, Lurker, FreezingRapier,
+             GreatAxe, Blazer, BigFlame, LegendaryAxe, InfinityScythe, ShadowBlade, Apple, Bread, HealthP, SuperHealthP]
 
+guide = Room("Guide Room", 'combat_training', None, None, None, None, None,
+             "Hello and welcome to RUIN.  In this game, you'll be working your way to find the exit.  Go ahead and "
+             "type in (north) or (n) to move onto the next place.", None, None, None, None)
 
-HealthPotion = ItemBuild("Health Potion", None, None, 55)
-WoodShield = ItemBuild("Wood Shield", 30, 5, None)
-WoodSword = ItemBuild("Wood Sword", None, 15, None)
-IronSword = ItemBuild("Iron Sword", None, 30, None)
-IronShield = ItemBuild("Iron Shield", 55, 10, None)
-IronBow = ItemBuild("Iron Bow", None, 25, None)
-WoodBow = ItemBuild("Wood Bow", None, 10, None)
-Torch = ItemBuild("Torch", None, None, None)
-GreenApple = ItemBuild("Green Apple", None, None, 30)
-GoldApple = ItemBuild("Gold Apple", None, None, 55)
-RedApple = ItemBuild("Red Apple", None, None, 15)
-ChainHelm = ItemBuild("Chain Helm", 25, None, None)
-ChainChestPlate = ItemBuild("Chain Chest Plate", 35, None, None)
-WaterBottle = ItemBuild("water bottle", None, None, 10)
+combat_training = Room("Combat Training", None, None, None, None, None, "ruin1",
+                       "In this area, you are going to experience a battle.  Simply type (battle), or go "
+                       "ahead and press (down), or (d), to go in "
+                       "the portal if you do not need the tutorial.", "battle0", None, None, None)
 
+battle0 = Room("Battle Mode", None, None, None, None, None, "combat_training",
+               "You entered a battle mode!  Type (evade) to avoid the attack.  You can attack by typing (sword). "
+               " Take this wooden sword!  Type (down), or (d), to escape the battle.  There is a LVL 0  enemy.  "
+               "< SAND SLIME >", None, "evade", "attack", None)
 
-outside = Room("Outside of House", 'room1', 'shelter', 'garden', None, None, None,
-               "You're outside of a house; there's a garden to the east and a shelter to the west.  There's a house"
-               " to the north.", input1)
+ruin1 = Room("RUIN-1", "ruin2", None, None, None, None, None,
+             "Welcome to RUIN-1, this is where you can type (shop) to open the shop.  There's a room to the "
+             "north.", None, None, None, "shop")
 
-garden = Room("Garden", None, None, None, None, None, "underground4",
-              "You're in a garden; there's nothing except dirt.", input1)
+ruin2 = Room("RUIN-2", "ruin3", None, None, None, None, None,
+             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
+             , "battle1", None, None, None)
 
-shelter = Room("Shelter", None, 'inside_shelter', "outside", None, None, None,
-               "You're in a shelter, there's a path to the west and a door to the east.", input1)
+battle1 = Room("Battle Mode", None, None, None, None, None, "ruin2",
+               "You entered battle mode!  There is a LVL 1 enemy.  < UNDEAD MUMMY >", None, "evade", "attack", None)
 
-room1 = Room("Entrance of House", 'room2', None, 'closet', 'outside', None, None,
-             "You entered your home and you have a path to the north and a door to the east and south; there"
-             " is also a table with items.", input1)
+ruin3 = Room("RUIN-2", "ruin3", None, None, None, None, None,
+             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
+             , "battle1", None, None, None)
 
-room2 = Room("Room 2", 'hallway1', 'kitchen', None, 'room1', None, None,
-             "You're in a room and there's a path the the north, west, and south.", None)
+battle2 = Room("Battle Mode", None, None, None, None, None, "ruin3",
+               "You entered battle mode!  There is a LVL 2 enemy.  < SKELETON >", None, "evade", "attack", None)
 
-closet = Room("Closet", None, 'room1', 'secret_room', None, None, None,
-              "You're in a closet and it's very crowded.", None)
+ruin3 = Room("RUIN-2", "ruin3", None, None, None, None, None,
+             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
+             , "battle1", None, None, None)
 
-secret_room = Room("Secret Room", None, 'closet', None, None, None, None,
-                   "You entered a secret room and you see lots of scrap metal.", input1)
+battle1 = Room("Battle Mode", None, None, None, None, None, "ruin2",
+               "You entered battle mode!  There is a LVL 1 enemy.  < UNDEAD MUMMY >", None, "evade", "attack", None)
 
-kitchen = Room("Kitchen", None, None, 'room2', None, None, None,
-               "You entered a kitchen, there is also a table.", input1)
+shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
+            "Welcome to the shop.  You will have to battle enemies to get enough money "
+            "to buy an item.  Type (down), or (d), to exit the shop.  To buy an item, simply type"
+            " (buy).", None, None, None, "shop")
 
-hallway1 = Room("Hallway 1", "front_house", 'bedroom1', 'bedroom2', 'room2', 'house_f2', None,
-                "You are in a hallway.  There's a room to the east, west, and there is a stair case that goes up."
-                "  There's also a door to the north.", None)
-
-bedroom1 = Room("Bedroom 1", None, None, 'hallway1', None, None, None,
-                "You entered a room and there's lots of furniture and items.", input1)
-
-bedroom2 = Room("Bedroom 2", None, 'hallway1', None, None, None, None,
-                "You entered a room and there's lots of furniture and items.", input1)
-
-inside_shelter = Room("Inside of Shelter", "craft", None, 'shelter', None, None, None,
-                      "You entered a room and there is a door to the north and a path to the east.", input1)
-
-craft = Room("Crafting Station", None, None, None, 'inside_shelter', None, None,
-             "You are in a room; it seems to be a crafting station.", None)
-
-house_f2 = Room("House F2", None, "room3", None, None, None, 'hallway1',
-                "You appeared at the top of the stair case and there's a room to the west.", None)
-
-room3 = Room("Room 3", None, None, "house_f2", None, "attic", "underground", "You are in a room, there's a door to "
-                                                                             "the east"
-                                                                             " and a ladder that goes up and down.",
-             None)
-
-underground1 = Room("Sewer 1", None, None, None, "underground1", "room3", None,
-                    "You are in an underground place.  There's a path to the south.", None)
-
-underground2 = Room("Sewer 2", "underground1", None, None, "underground3", None, None, "You are in an underground "
-                    "place, there's a path to the north and south.", None)
-
-underground3 = Room("Sewer 3", "underground2", None, None, "underground4", None, None, "You are in an underground "
-                    "place, there's a path to the north and south.", None)
-
-underground4 = Room("Sewer 4", "underground3", None, None, None, "garden", None, "You are in an underground "
-                    "place.  There's a ladder that goes up and a path to the north.", input1)
-
-
-attic = Room("Attic 1", 'attic2', None, None, None, None, "room3",
-             "You appeared in an attic; nothing is near you.", input1)
-
-attic2 = Room("Attic 2", 'front_house', None, None, 'attic', None, None,
-              "You are near a window.", None)
-
-front_house = Room("Front of House", "road", None, None, "hallway1", None, None,
-                   "You appeared on the front side of your house with a road to the north.  There's also a door to"
-                   " the south which is the front entrance of the house.", input1)
-
-road = Room("Endless Road (look)", None, None, None, None, None, None, "You walked endlessly, but you did not survive."
-                                                                       "(You lose...)", None)
-
-
-current_node = outside
-DIRECTIONS = ["north", "east", "south", "west", "up", "down"]
+current_node = guide
+DIRECTIONS = ["north", "east", "south", "west", "up", "down", "battle", "shop"]
 short_directions = ["n", "e", "s", "w", "u", "d"]
 
 while True:
@@ -536,147 +398,24 @@ while True:
         quit(0)  # ADD THIS CODE TO NOT REPEAT!!!
     if command == "help":
         print("Use (n), (w), (e), (s) to move around as for short directions.  Use (north), (west), (east), and (south)"
-              " for directions.")
+              " for directions.  Type (look) to look for the description of a room.")
         print()
-        print("To pick up items, type (pick up).  To interact with items, type (interact).")
+        print("You can battle an enemy by typing (battle).")
         print()
-
-    if command == "pick up":
-        if input1 == current_node:
-            item = input("Pick up what?  CHAT:>_")
-            print()
-            if item == "torch":
-                print("You picked up the torch.")
-                print()
-
-            if item == "green apple":
-                print("You picked up the green apple.")
-                print()
-
-            if item == "gold apple":
-                print("You picked up the gold apple.")
-                print()
-
-            if item == "red apple":
-                print("You picked up the red apple.")
-                print()
-
-            if item == "water bottle":
-                print("You picked up the water bottle.")
-                print()
-
-            if item == "health potion":
-                print("You picked up the health potion.")
-                print()
-
-            if item == "iron sword":
-                print("You picked up the iron sword.")
-                print()
-
-            if item == "wood sword":
-                print("You picked up the wood sword.")
-                print()
-
-            if item == "iron shield":
-                print("You picked up the iron shield.")
-                print()
-
-            if item == "wood shield":
-                print("You picked up the wood shield.")
-                print()
-
-            if item == "wood bow":
-                print("You picked up the wood bow.")
-                print()
-
-            if item == "iron bow":
-                print("You picked up the iron bow.")
-                print()
-
-            if item == "chain chest plate":
-                print("You picked up the chain chest plate.")
-                print()
-
-            if item == "chain helm":
-                print("You picked up the chain helm.")
-                print()
-        elif input1 != current_node:
-            print("There's no items near you.")
-            print()
-
-
-    class Interact(object):
-
-        def __init__(self, eat, hit, drop, shoot):
-            self.eat = eat
-            self.hit = hit
-            self.drop = drop
-            self.shoot = shoot
-
-            eat = Interact("eat", None, None, None)
-            hit = Interact(None, "hit", None, None)
-            drop = Interact(None, None, "drop", None)
-            shoot = Interact(None, None, None, "shoot")
-
-            interact = [eat, hit, drop, shoot]
-
-    if command == "interact":  # FIX
-        item = input("Interact what?  CHAT:>_")
+        print("To get an item, simply type (shop) in RUIN-1.")
         print()
-        if item == "torch":
-            input("What do you want to do with the torch?  CHAT:>_")
+    if battle0 == current_node:
+        if command == "evade":
+            print("You avoided the enemy's attack.")
+            print()
+        if command == "attack":
+            print("You attacked the enemy.")
             print()
 
-        if item == "green apple":
-            input("What do you want to do with the green apple?  CHAT:>_")
-            print()
-
-        if item == "gold apple":
-            input("What do you want to do with the gold apple?  CHAT:>_")
-            print()
-
-        if item == "red apple":
-            input("What do you want to do with the red apple?  CHAT:>_")
-            print()
-
-        if item == "water bottle":
-            input("What do you want to do with the water bottle?  CHAT:>_")
-            print()
-
-        if item == "health potion":
-            input("What do you want to do with the health potion?  CHAT:>_")
-            print()
-
-        if item == "iron sword":
-            input("What do you want to do with the iron sword?  CHAT:>_")
-            print()
-
-        if item == "wood sword":
-            input("What do you want to do with the wood sword?  CHAT:>_")
-            print()
-
-        if item == "iron shield":
-            input("What do you want to do with the iron shield?  CHAT:>_")
-            print()
-
-        if item == "wood shield":
-            input("What do you want to do with the wood shield?  CHAT:>_")
-            print()
-
-        if item == "wood bow":
-            input("What do you want to do with the wood bow?  CHAT:>_")
-            print()
-
-        if item == "iron bow":
-            input("What do you want to do with the iron bow?  CHAT:>_")
-            print()
-
-        if item == "chain chest plate":
-            input("What do you want to do with the chain chest plate?  CHAT:>_")
-            print()
-
-        if item == "chain helm":
-            input("What do you want to do with the chain helm?  CHAT:>_")
+    if shop == current_node:
+        if command == "shop":
+            print("You have (money.name).")
+            print(shop_item)
             print()
 
     elif command in short_directions:
@@ -686,5 +425,5 @@ while True:
         try:
             current_node.move(command)
         except KeyError:
-            print("You cannot go this way.")
+            print("You cannot do this.")
             print()
