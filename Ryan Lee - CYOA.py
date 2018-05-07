@@ -248,91 +248,21 @@ apple = Apple("apple", 5, 5)
 
 
 class Character(object):
-    def __init__(self, name, health_status, take_damage, inventory, status_effect):
+    def __init__(self, name, inventory, take_dmg, health):
         self.name = name
-        self.health_status = health_status
-        self.dmg = take_damage
         self.inventory = inventory
-        self.status = status_effect
+        self.take_dmg = take_dmg
+        self.health = health
 
 
-class PlayerName(Character):
+class Name(Character):
     def __init__(self, name):
-        super(PlayerName, self). __init__(name, None, None, None, None)
+        super(Name, self). __init__(name)
 
 
-name = PlayerName("SUBJECT 0")
-
-
-class Health(Character):
-    def __init__(self, health_status):
-        super(Health, self). __init__(None, health_status, None, None, None)
-        self.health = health_status
-
-    def healthy(self):
-        print("You are healthy.")
-
-    def not_healthy(self):
-        print("You are not healthy.")
-
-
-current_health = 100
-
-
-class TakeDMG(Character):
-    def __init__(self, take_damage):
-        super(TakeDMG, self). __init__(None, None, take_damage, None, None)
-        self.damage = take_damage
-
-    def enemy(self):
-        print("The enemy attacked.")
-
-
-dmg = TakeDMG(10)
-
-
-class Inventory(Character):
-    def __init__(self, inventory):
-        super(Inventory, self). __init__(None, None, None, Inventory, None)
-        self.inventory = inventory
-
-        inventory = 0
-        if command == "test":
-            print("You picked up the item.")
-            print(1 + + inventory)
-
-        if inventory == 15:
-            print("You cannot pick anymore items.")
-
-
-while False:  # FIX
-    class Status(Character):
-        def __init__(self, status_effect):
-            super(Status, self). __init__(None, None, None, None, status_effect)
-            self.status = status_effect
-
-        def poisoned(self):
-            poison_dmg = -5
-            poison_effect = False
-
-            if poison_effect:
-                import time
-                time.sleep(10)
-                print("You are poisoned...")
-                Health = current_health + poison_dmg
-                print("Your health is at %d." % Health)
-
-    def move(self, direction):
-        global current_node
-        current_node = globals()[getattr(self, direction)]
-
-
-class ItemBuild(object):
-    def __init__(self, name, defense, damage, health_give):
-        self.name = name
-        self.defense = defense
-        self.damage = damage
-        self.health_give = health_give
+def move(self, direction):
+    global current_node
+    current_node = globals()[getattr(self, direction)]
 
 
 shop_item = [StoneSword, IronSword, BoneSword, AxeOfFlame, ChillingSpear, LegendarySword, Lurker, FreezingRapier,
@@ -363,9 +293,12 @@ ruin2 = Room("RUIN-2", "ruin3", None, None, None, None, None,
 battle2 = Room("Battle Mode", None, None, None, None, None, "ruin2",
                "You entered battle mode!  There is a LVL 1 enemy.  < UNDEAD MUMMY >", None, "evade", "attack", None)
 
-ruin3 = Room("RUIN-3", "ruin4", None, None, None, None, None,
+ruin3 = Room("RUIN-3", "ruin4", "grave1", None, None, None, None,
              "You entered RUIN-2, there's a path to the north and south.  There is an enemy."
              , "battle3", None, None, None)
+
+grave1 = Room("Grave-1", None, None, "ruin3", None, None, None, "You entered a room, there's a grave and a path to the "
+              " east.", None, None, None, None)
 
 battle3 = Room("Battle Mode", None, None, None, None, None, "ruin3",
                "You entered battle mode!  There is a LVL 2 enemy.  < SKELETON >", None, "evade", "attack", None)
@@ -391,9 +324,12 @@ ruin6 = Room("RUIN-6", None, "ruin5", "ruin7", None, None, None,
 battle6 = Room("Battle Mode", None, None, None, None, None, "ruin6",
                "You entered battle mode!  There is a LVL 3 enemy.  < EYE SHOT >", None, "evade", "attack", None)
 
-ruin7 = Room("RUIN-7", None, "ruin6", "ruin8", None, None, None,
+ruin7 = Room("RUIN-7", "grave2", "ruin6", "ruin8", None, None, None,
              "You entered RUIN-7, there's a path to the west and east.  There is an enemy."
              , "battle7", None, None, None)
+
+grave2 = Room("Grave-2", None, None, None, "ruin7", None, None, "You entered a room, there's a grave and a path to the "
+              " south.", None, None, None, None)
 
 battle7 = Room("Battle Mode", None, None, None, None, None, "ruin7",
                "You entered battle mode!  There is a LVL 3 enemy.  < EYE SHOT >", None, "evade", "attack", None)
@@ -419,9 +355,13 @@ ruin10 = Room("RUIN-10", "ruin9", None, None, "ruin11", None, None,
 battle10 = Room("Battle Mode", None, None, None, None, None, "ruin10",
                 "You entered battle mode!  There is a LVL 4 enemy.  < CARNAGE >", None, "evade", "attack", None)
 
-ruin11 = Room("RUIN-11", "ruin10", None, None, "ruin12", None, None,
+ruin11 = Room("RUIN-11", "ruin10", None, "grave3", "ruin12", None, None,
               "You entered RUIN-11, there's a path to the north and south.  There is an enemy."
               , "battle11", None, None, None)
+
+grave3 = Room("Grave-3", None, "ruin11", None, None, None, None,
+              "You entered a room, there's a grave and a path to the "
+              " west.", None, None, None, None)
 
 battle11 = Room("Battle Mode", None, None, None, None, None, "ruin11",
                 "You entered battle mode!  There is a LVL 5 enemy.  < SUPER MUMMY >", None, "evade", "attack", None)
@@ -447,9 +387,13 @@ ruin14 = Room("RUIN-14", None, "ruin15", "ruin13", None, None, None,
 battle14 = Room("Battle Mode", None, None, None, None, None, "ruin14",
                 "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
 
-ruin15 = Room("RUIN-15", None, "ruin16", "ruin14", None, None, None,
+ruin15 = Room("RUIN-15", None, "ruin16", "ruin14", "grave4", None, None,
               "You entered RUIN-15, there's a path to the west and east.  There is an enemy."
               , "battle15", None, None, None)
+
+grave4 = Room("Grave-4", "ruin15", None, None, None, None, None,
+              "You entered a room, there's a grave and a path to the "
+              " north.", None, None, None, None)
 
 battle15 = Room("Battle Mode", None, None, None, None, None, "ruin15",
                 "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
@@ -473,50 +417,59 @@ ruin18 = Room("RUIN-118", "ruin19", None, None, "ruin17", None, None,
               , "battle18", None, None, None)
 
 battle18 = Room("Battle Mode", None, None, None, None, None, "ruin18",
-                "You entered battle mode!  There is a LVL 7 enemy.  < GOATMAN >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 7 enemy.  < GOAT MAN >", None, "evade", "attack", None)
 
 ruin19 = Room("RUIN-19", None, None, "ruin20", "ruin18", None, None,
               "You entered RUIN-19, there's a path to the east and south.  There is an enemy."
               , "battle19", None, None, None)
 
 battle19 = Room("Battle Mode", None, None, None, None, None, "ruin19",
-                "You entered battle mode!  There is a LVL 7 enemy.  < GOATMAN >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 7 enemy.  < GOAT MAN >", None, "evade", "attack", None)
 
 ruin20 = Room("RUIN-20", None, "ruin17", "ruin21", None, None, None,
               "You entered RUIN-20, there's a path to the west and east.  There is an enemy."
               , "battle20", None, None, None)
 
 battle20 = Room("Battle Mode", None, None, None, None, None, "ruin20",
-                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEADGOLEM >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEAD GOLEM >", None, "evade", "attack", None)
 
 ruin21 = Room("RUIN-21", None, "ruin20", None, "ruin22", None, None,
               "You entered RUIN-21, there's a path to the west and south.  There is an enemy."
               , "battle21", None, None, None)
 
 battle21 = Room("Battle Mode", None, None, None, None, None, "ruin21",
-                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEADGOLEM >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEAD GOLEM >", None, "evade", "attack", None)
 
 ruin22 = Room("RUIN-22", "ruin21", None, None, "ruin23", None, None,
               "You entered RUIN-22, there's a path to the north and south.  There is an enemy."
               , "battle22", None, None, None)
 
 battle22 = Room("Battle Mode", None, None, None, None, None, "ruin22",
-                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOWDEMON >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOW DEMON >", None, "evade", "attack", None)
 
-ruin23 = Room("RUIN-23", "ruin22", "ruin24", None, None, None, None,
+ruin23 = Room("RUIN-23", "ruin22", "battle24", None, None, None, None,
               "You entered RUIN-23, there's a path to the north and west.  There is an enemy."
               , "battle23", None, None, None)
 
 battle23 = Room("Battle Mode", None, None, None, None, None, "ruin23",
-                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOWDEMON >", None, "evade", "attack", None)
+                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOW DEMON >", None, "evade", "attack", None)
 
-ruin24 = Room("RUIN-24", "escape", None, "ruin23", None, None, None,
+ruin24 = Room("RUIN-24", "end", None, "ruin23", None, None, None,
               "You entered RUIN-24, there's a path to the north and east.  You see the corpse of the WRAITH near you."
               , None, None, None, None)
 
 battle24 = Room("Battle Mode", None, None, None, None, None, None,
                 "You entered battle mode!  The boss has closed the entrance you came from, you will not be able to "
                 "escape.  There is a LVL 10 enemy.  < WRAITH >", None, "evade", "attack", None)
+
+end = Room("END", None, None, None, None, "exit0", "endBOSS", "You entered the END, there's a ladder which leads up.",
+           None, None, None, None)
+
+exit0 = Room("Escaped...", None, None, None, None, None, None, "You exit from the ground.  You walked away from the "
+             "place you came from, and you were never seen again, but you became a legend.", None, None, None, None)
+
+endBOSS = Room("Battle Mode", None, None, None, None, None, "end",
+               "You entered battle mode...  There is an enemy.  < END >", None, "evade", "attack", None)
 
 shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
             "Welcome to the shop.  You will have to battle enemies to get enough money "
@@ -549,6 +502,12 @@ while True:
     if ruin17 == current_node:
         print("You hear a loud scream up ahead...")
         print()
+
+    if command == "inventory":
+        print("What do you want to use?")
+
+    if exit0 == current_node:
+        exit(0)
 
     if battle1 == current_node:
         if command == "evade":
