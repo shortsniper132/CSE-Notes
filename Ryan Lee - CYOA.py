@@ -345,9 +345,9 @@ guide = Room("Guide Room", 'combat_training', None, None, None, None, None,
 combat_training = Room("Combat Training", None, None, None, None, None, "ruin1",
                        "In this area, you are going to experience a battle.  Simply type (battle), or go "
                        "ahead and press (down), or (d), to go in "
-                       "the portal if you do not need the tutorial.", "battle0", None, None, None)
+                       "the portal if you do not need the tutorial.", "battle1", None, None, None)
 
-battle0 = Room("Battle Mode", None, None, None, None, None, "combat_training",
+battle1 = Room("Battle Mode", None, None, None, None, None, "combat_training",
                "You entered a battle mode!  Type (evade) to avoid the attack.  You can attack by typing (sword). "
                " Take this wooden sword!  Type (down), or (d), to escape the battle.  There is a LVL 0  enemy.  "
                "< SAND SLIME >", None, "evade", "attack", None)
@@ -357,25 +357,166 @@ ruin1 = Room("RUIN-1", "ruin2", None, None, None, None, None,
              "north.", None, None, None, "shop")
 
 ruin2 = Room("RUIN-2", "ruin3", None, None, None, None, None,
-             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
-             , "battle1", None, None, None)
+             "You entered RUIN-2, there's a path to the north and south.  There is an enemy."
+             , "battle2", None, None, None)
 
-battle1 = Room("Battle Mode", None, None, None, None, None, "ruin2",
+battle2 = Room("Battle Mode", None, None, None, None, None, "ruin2",
                "You entered battle mode!  There is a LVL 1 enemy.  < UNDEAD MUMMY >", None, "evade", "attack", None)
 
-ruin3 = Room("RUIN-2", "ruin3", None, None, None, None, None,
-             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
-             , "battle1", None, None, None)
+ruin3 = Room("RUIN-3", "ruin4", None, None, None, None, None,
+             "You entered RUIN-2, there's a path to the north and south.  There is an enemy."
+             , "battle3", None, None, None)
 
-battle2 = Room("Battle Mode", None, None, None, None, None, "ruin3",
+battle3 = Room("Battle Mode", None, None, None, None, None, "ruin3",
                "You entered battle mode!  There is a LVL 2 enemy.  < SKELETON >", None, "evade", "attack", None)
 
-ruin3 = Room("RUIN-2", "ruin3", None, None, None, None, None,
-             "You entered RUIN-2, there's a path to the north and south.  There are also enemies."
-             , "battle1", None, None, None)
+ruin4 = Room("RUIN-4", "ruin5", None, None, None, None, None,
+             "You entered RUIN-4, there's a path to the north and south.  There is an enemy."
+             , "battle4", None, None, None)
 
-battle1 = Room("Battle Mode", None, None, None, None, None, "ruin2",
-               "You entered battle mode!  There is a LVL 1 enemy.  < UNDEAD MUMMY >", None, "evade", "attack", None)
+battle4 = Room("Battle Mode", None, None, None, None, None, "ruin4",
+               "You entered battle mode!  There is a LVL 2 enemy.  < SKELETON >", None, "evade", "attack", None)
+
+ruin5 = Room("RUIN-5", None, None, "ruin6", "ruin4", None, None,
+             "You entered RUIN-5, there's a path to the east and south.  There is an enemy."
+             , "battle5", None, None, None)
+
+battle5 = Room("Battle Mode", None, None, None, None, None, "ruin5",
+               "You entered battle mode!  There is a LVL 3 enemy.  < EYE SHOT >", None, "evade", "attack", None)
+
+ruin6 = Room("RUIN-6", None, "ruin5", "ruin7", None, None, None,
+             "You entered RUIN-6, there's a path to the west and east.  There is an enemy."
+             , "battle6", None, None, None)
+
+battle6 = Room("Battle Mode", None, None, None, None, None, "ruin6",
+               "You entered battle mode!  There is a LVL 3 enemy.  < EYE SHOT >", None, "evade", "attack", None)
+
+ruin7 = Room("RUIN-7", None, "ruin6", "ruin8", None, None, None,
+             "You entered RUIN-7, there's a path to the west and east.  There is an enemy."
+             , "battle7", None, None, None)
+
+battle7 = Room("Battle Mode", None, None, None, None, None, "ruin7",
+               "You entered battle mode!  There is a LVL 3 enemy.  < EYE SHOT >", None, "evade", "attack", None)
+
+ruin8 = Room("RUIN-8", None, "ruin7", "ruin9", None, None, None,
+             "You entered RUIN-8, there's a path to the west and east.  There is an enemy."
+             , "battle8", None, None, None)
+
+battle8 = Room("Battle Mode", None, None, None, None, None, "ruin8",
+               "You entered battle mode!  There is a LVL 4 enemy.  < CARNAGE >", None, "evade", "attack", None)
+
+ruin9 = Room("RUIN-9", None, "ruin8", None, "ruin10", None, None,
+             "You entered RUIN-9, there's a path to the west and south.  There is an enemy."
+             , "battle9", None, None, None)
+
+battle9 = Room("Battle Mode", None, None, None, None, None, "ruin9",
+               "You entered battle mode!  There is a LVL 4 enemy.  < CARNAGE >", None, "evade", "attack", None)
+
+ruin10 = Room("RUIN-10", "ruin9", None, None, "ruin11", None, None,
+              "You entered RUIN-10, there's a path to the north and south.  There is an enemy."
+              , "battle10", None, None, None)
+
+battle10 = Room("Battle Mode", None, None, None, None, None, "ruin10",
+                "You entered battle mode!  There is a LVL 4 enemy.  < CARNAGE >", None, "evade", "attack", None)
+
+ruin11 = Room("RUIN-11", "ruin10", None, None, "ruin12", None, None,
+              "You entered RUIN-11, there's a path to the north and south.  There is an enemy."
+              , "battle11", None, None, None)
+
+battle11 = Room("Battle Mode", None, None, None, None, None, "ruin11",
+                "You entered battle mode!  There is a LVL 5 enemy.  < SUPER MUMMY >", None, "evade", "attack", None)
+
+ruin12 = Room("RUIN-12", "ruin11", None, None, "ruin13", None, None,
+              "You entered RUIN-12, there's a path to the north and south.  There is an enemy."
+              , "battle12", None, None, None)
+
+battle12 = Room("Battle Mode", None, None, None, None, None, "ruin12",
+                "You entered battle mode!  There is a LVL 5 enemy.  < SUPER MUMMY >", None, "evade", "attack", None)
+
+ruin13 = Room("RUIN-13", "ruin12", "ruin14", None, None, None, None,
+              "You entered RUIN-13, there's a path to the north and west.  There is an enemy."
+              , "battle13", None, None, None)
+
+battle13 = Room("Battle Mode", None, None, None, None, None, "ruin13",
+                "You entered battle mode!  There is a LVL 5 enemy.  < SUPER MUMMY >", None, "evade", "attack", None)
+
+ruin14 = Room("RUIN-14", None, "ruin15", "ruin13", None, None, None,
+              "You entered RUIN-14, there's a path to the west and east.  There is an enemy."
+              , "battle14", None, None, None)
+
+battle14 = Room("Battle Mode", None, None, None, None, None, "ruin14",
+                "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
+
+ruin15 = Room("RUIN-15", None, "ruin16", "ruin14", None, None, None,
+              "You entered RUIN-15, there's a path to the west and east.  There is an enemy."
+              , "battle15", None, None, None)
+
+battle15 = Room("Battle Mode", None, None, None, None, None, "ruin15",
+                "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
+
+ruin16 = Room("RUIN-16", "ruin17", None, "ruin15", None, None, None,
+              "You entered RUIN-16, there's a path to the north and east.  There is an enemy."
+              , "battle16", None, None, None)
+
+battle16 = Room("Battle Mode", None, None, None, None, None, "ruin16",
+                "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
+
+ruin17 = Room("RUIN-17", "ruin18", None, None, "ruin16", None, None,
+              "You entered RUIN-17, there's a path to the north and south.  There is an enemy."
+              , "battle16", None, None, None)
+
+battle17 = Room("Battle Mode", None, None, None, None, None, "ruin17",
+                "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None)
+
+ruin18 = Room("RUIN-118", "ruin19", None, None, "ruin17", None, None,
+              "You entered RUIN-18, there's a path to the north and south.  There is an enemy."
+              , "battle18", None, None, None)
+
+battle18 = Room("Battle Mode", None, None, None, None, None, "ruin18",
+                "You entered battle mode!  There is a LVL 7 enemy.  < GOATMAN >", None, "evade", "attack", None)
+
+ruin19 = Room("RUIN-19", None, None, "ruin20", "ruin18", None, None,
+              "You entered RUIN-19, there's a path to the east and south.  There is an enemy."
+              , "battle19", None, None, None)
+
+battle19 = Room("Battle Mode", None, None, None, None, None, "ruin19",
+                "You entered battle mode!  There is a LVL 7 enemy.  < GOATMAN >", None, "evade", "attack", None)
+
+ruin20 = Room("RUIN-20", None, "ruin17", "ruin21", None, None, None,
+              "You entered RUIN-20, there's a path to the west and east.  There is an enemy."
+              , "battle20", None, None, None)
+
+battle20 = Room("Battle Mode", None, None, None, None, None, "ruin20",
+                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEADGOLEM >", None, "evade", "attack", None)
+
+ruin21 = Room("RUIN-21", None, "ruin20", None, "ruin22", None, None,
+              "You entered RUIN-21, there's a path to the west and south.  There is an enemy."
+              , "battle21", None, None, None)
+
+battle21 = Room("Battle Mode", None, None, None, None, None, "ruin21",
+                "You entered battle mode!  There is a LVL 8 enemy.  < UNDEADGOLEM >", None, "evade", "attack", None)
+
+ruin22 = Room("RUIN-22", "ruin21", None, None, "ruin23", None, None,
+              "You entered RUIN-22, there's a path to the north and south.  There is an enemy."
+              , "battle22", None, None, None)
+
+battle22 = Room("Battle Mode", None, None, None, None, None, "ruin22",
+                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOWDEMON >", None, "evade", "attack", None)
+
+ruin23 = Room("RUIN-23", "ruin22", "ruin24", None, None, None, None,
+              "You entered RUIN-23, there's a path to the north and west.  There is an enemy."
+              , "battle23", None, None, None)
+
+battle23 = Room("Battle Mode", None, None, None, None, None, "ruin23",
+                "You entered battle mode!  There is a LVL 9 enemy.  < SHADOWDEMON >", None, "evade", "attack", None)
+
+ruin24 = Room("RUIN-24", "escape", None, "ruin23", None, None, None,
+              "You entered RUIN-24, there's a path to the north and east.  You see the corpse of the WRAITH near you."
+              , None, None, None, None)
+
+battle24 = Room("Battle Mode", None, None, None, None, None, None,
+                "You entered battle mode!  The boss has closed the entrance you came from, you will not be able to "
+                "escape.  There is a LVL 10 enemy.  < WRAITH >", None, "evade", "attack", None)
 
 shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
             "Welcome to the shop.  You will have to battle enemies to get enough money "
@@ -404,7 +545,12 @@ while True:
         print()
         print("To get an item, simply type (shop) in RUIN-1.")
         print()
-    if battle0 == current_node:
+
+    if ruin17 == current_node:
+        print("You hear a loud scream up ahead...")
+        print()
+
+    if battle1 == current_node:
         if command == "evade":
             print("You avoided the enemy's attack.")
             print()
