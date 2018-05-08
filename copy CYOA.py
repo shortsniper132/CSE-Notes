@@ -689,3 +689,8 @@ while True:
         except KeyError:
             print("You cannot go this way.")
             print()
+
+# This is a copy...
+# def move(self, direction):
+#    global current_node
+#    current_node = globals()[getattr(self, direction)]
