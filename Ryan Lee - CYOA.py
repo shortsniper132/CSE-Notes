@@ -107,7 +107,7 @@ class LegendarySword(Weapon):
         self.cost = cost
 
 
-legendary_sword = LegendarySword("iron sword", 80, 300)
+legendary_sword = LegendarySword("legendary sword", 80, 300)
 
 
 class Lurker(Weapon):
@@ -248,23 +248,22 @@ apple = Apple("apple", 5, 5)
 
 
 class Character(object):
-    def __init__(self, character_name, health, inventory, coin, damage_taken):
+    def __init__(self, character_name, health, inventory, coin):
         self.name = character_name
         self.health = health
         self.inventory = inventory
         self.coin = coin
-        self.damage_taken = damage_taken
 
 
 class Name(Character):
     def __init__(self, character_name):
-        super(Name, self). __init__(character_name, None, None, None, None)
+        super(Name, self). __init__(character_name, None, None, None)
         self.character_name = character_name
 
 
 class Health(Character):
     def __init__(self, health):
-        super(Health, self). __init__(None, health, None, None, None)
+        super(Health, self). __init__(None, health, None, None)
         self.health = health
     health = 100
     if health == 0:
@@ -274,17 +273,13 @@ class Health(Character):
 
 class Inventory(Character):
     def __init__(self, inventory):
-        super(Inventory, self). __init__(None, None, inventory, None, None)
+        super(Inventory, self). __init__(None, None, inventory, None)
 
 
-class Coin(Character):
+class Coins(Character):
     def __init__(self, coin):
-        super(Coin, self). __init__(None, None, None, coin, None)
-
-
-class DamageTaken(Character):
-    def __init__(self, damage_taken):
-        super(DamageTaken, self). __init__(None, None, None, None, damage_taken)
+        super(Coins, self). __init__(None, None, None, coin)
+    coin = 0
 
 
 shop_item = [StoneSword, IronSword, BoneSword, AxeOfFlame, ChillingSpear, LegendarySword, Lurker, FreezingRapier,
@@ -499,8 +494,8 @@ endBOSS = Room("Battle Mode", None, None, None, None, None, "end",
 
 shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
             "Welcome to the shop.  You will have to battle enemies to get enough money "
-            "to buy an item.  Type (down), or (d), to exit the shop.  To buy an item, simply type"
-            " (buy).", None, None, None, "shop")
+            "to buy an item.  Type (down) to exit the shop.  To see the items, simply type (shop).",
+            None, None, None, "shop")
 
 current_node = guide
 DIRECTIONS = ["north", "east", "south", "west", "up", "down", "battle", "shop"]
@@ -510,31 +505,55 @@ while True:
     print(current_node.name)
     print()
     command = input("CHAT: >_").lower().strip()
-    print("")
+    print()
+    print("---------------------------------------------------------------------------------------------------")
+    print()
     if command == "look":
         print(current_node.look)
-    print(" ")
+        print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
     if command == "quit":
-        quit(0)  # ADD THIS CODE TO NOT REPEAT!!!
+        print("You quit the game...")
+        quit(0)
     if command == "help":
+        print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
+        print("GUIDE:")
         print("Use (n), (w), (e), (s) to move around as for short directions.  Use (north), (west), (east), and (south)"
               " for directions.  Type (look) to look for the description of a room.")
         print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
         print("You can battle an enemy by typing (battle).")
         print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
         print("To get an item, simply type (shop) in RUIN-1.")
+        print()
+        print("---------------------------------------------------------------------------------------------------")
         print()
 
     if ruin17 == current_node:
         print("You hear a loud scream up ahead...")
         print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
 
     if command == "inventory":
         print("This is what you have.")
         print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
+        print("INVENTORY:")
         print(Inventory)
         print()
+        print("---------------------------------------------------------------------------------------------------")
+        print()
         input("What do you want to use?  CHAT: >_")
+        print()
+        print("---------------------------------------------------------------------------------------------------")
         print()
 
     if exit0 == current_node:
@@ -544,19 +563,39 @@ while True:
         if command == "evade":
             print("You avoided the enemy's attack.")
             print()
+            print("---------------------------------------------------------------------------------------------------")
+            print()
         if command == "attack":
             print("You attacked the enemy.")
+            print()
+            print("---------------------------------------------------------------------------------------------------")
             print()
 
     if shop == current_node:
         if command == "shop":
-            print("You have (money.name).")
+
+            print()
+            print("---------------------------------------------------------------------------------------------------")
             print()
             print("SHOP ITEM:")
-            input("What type of items do you want?  < WEAPON > or < HEALTH >")
-            if command == "weapon" or "WEAPON":
-                print(shop_itemNAMES)
+            print(shop_itemNAMES)
             print()
+            print("---------------------------------------------------------------------------------------------------")
+            print()
+            print("You have %d coins." % Coins.coin)
+            print()
+            print("---------------------------------------------------------------------------------------------------")
+            print()
+            if input("SHOP KEEPER:  What do you want to need?  You can type (details) for the details of the items, or "
+                     "(buy) to buy an item.   CHAT: >_"):
+                print()
+                print("-----------------------------------------------------------------------------------------------")
+                print()
+            if command == "details":
+                print("details")
+
+            if command == "buy":
+                print("buy")
 
     elif command in short_directions:
         position = short_directions.index(command)
