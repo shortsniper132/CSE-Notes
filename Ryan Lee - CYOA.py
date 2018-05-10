@@ -137,7 +137,7 @@ class GreatAxe(Weapon):
         self.cost = cost
 
 
-great_axe = GreatAxe("great axe", 150, 530)
+great_axe = GreatAxe("great axe", 170, 560)
 
 
 class Blazer(Weapon):
@@ -147,7 +147,7 @@ class Blazer(Weapon):
         self.cost = cost
 
 
-blazer = Blazer("blazer", 180, 690)
+blazer = Blazer("blazer", 230, 700)
 
 
 class BigFlame(Weapon):
@@ -157,7 +157,7 @@ class BigFlame(Weapon):
         self.cost = cost
 
 
-big_flame = BigFlame("big flame", 230, 690)
+big_flame = BigFlame("big flame", 320, 900)
 
 
 class LegendaryAxe(Weapon):
@@ -167,7 +167,7 @@ class LegendaryAxe(Weapon):
         self.cost = cost
 
 
-legendary_axe = LegendaryAxe("legendary axe", 270, 800)
+legendary_axe = LegendaryAxe("legendary axe", 450, 1500)
 
 
 class InfinityScythe(Weapon):
@@ -177,7 +177,7 @@ class InfinityScythe(Weapon):
         self.cost = cost
 
 
-infinity_scythe = InfinityScythe("infinity scythe", 350, 1000)
+infinity_scythe = InfinityScythe("infinity scythe", 600, 2000)
 
 
 class ShadowBlade(Weapon):
@@ -187,7 +187,7 @@ class ShadowBlade(Weapon):
         self.cost = cost
 
 
-shadow_blade = ShadowBlade("shadow blade", 500, 2000)
+shadow_blade = ShadowBlade("shadow blade", 1000, 3000)
 
 
 class Consumable(Item):
@@ -244,7 +244,7 @@ class Apple(Food):
 apple = Apple("apple", 5, 5)
 
 
-# LINE
+
 
 
 class Character(object):
@@ -497,6 +497,125 @@ shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
             "to buy an item.  Type (down) to exit the shop.  To see the items, simply type (shop).",
             None, None, None, "shop")
 
+
+class Enemies(object):
+    def __init__(self, name, health, damage, coin_drop):
+        self.name = name
+        self.health = health
+        self.damage = damage
+        self.coin_drop = coin_drop
+
+
+class SandSlime(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(SandSlime, self).__init__(name, health, damage, coin_drop)
+
+
+ss = SandSlime("Sand Slime", 30, 2, 2)
+
+
+class UndeadMummy(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(UndeadMummy, self).__init__(name, health, damage, coin_drop)
+
+
+um = UndeadMummy("Undead Mummy", 60, 5, 3)
+
+
+class Skeleton(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(Skeleton, self).__init__(name, health, damage, coin_drop)
+
+
+s = Skeleton("Skeleton", 90, 3, 4)
+
+
+class EyeShot(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(EyeShot, self).__init__(name, health, damage, coin_drop)
+
+
+es = EyeShot("Eye Shot", 50, 15, 4)
+
+
+class Carnage(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(Carnage, self).__init__(name, health, damage, coin_drop)
+
+
+c = Carnage("Carnage", 350, 6, 5)
+
+
+class SuperMummy(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(SuperMummy, self).__init__(name, health, damage, coin_drop)
+
+
+sm = SuperMummy("Super Mummy", 500, 5, 7)
+
+
+class Destroyer(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(Destroyer, self).__init__(name, health, damage, coin_drop)
+
+
+d = Destroyer("Destroyer", 750, 3, 9)
+
+
+class GoatMan(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(GoatMan, self).__init__(name, health, damage, coin_drop)
+
+
+gm = GoatMan("Goat Man", 1500, 10, 13)
+
+
+class UndeadGolem(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(UndeadGolem, self).__init__(name, health, damage, coin_drop)
+
+
+ug = UndeadGolem("Undead Golem", 2000, 15, 25)
+
+
+class ShadowDemon(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(ShadowDemon, self).__init__(name, health, damage, coin_drop)
+
+
+sd = ShadowDemon("Shadow Demon", 4000, 5, 35)
+
+
+class Wraith(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(Wraith, self).__init__(name, health, damage, coin_drop)
+
+    def wraith_attack(self):
+        attack = -25
+
+    if current_node == ruin24 and command == "attack":
+        print("The wraith attacked!")
+
+
+w = Wraith("Wraith", 8000, 25, 0)
+
+
+class Anubis(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(Anubis, self).__init__(name, health, damage, coin_drop)
+
+
+a = Anubis("Anubis", 300000, 10, 0)
+
+
+class END(Enemies):
+    def __init__(self, name, health, damage, coin_drop):
+        super(END, self).__init__(name, health, damage, coin_drop)
+
+
+e = END("Anubis", 5000, 100, 0)
+
+
 current_node = guide
 DIRECTIONS = ["north", "east", "south", "west", "up", "down", "battle", "shop"]
 short_directions = ["n", "e", "s", "w", "u", "d"]
@@ -591,8 +710,9 @@ while True:
                 print()
                 print("-----------------------------------------------------------------------------------------------")
                 print()
+            choice = ["details", "buy"]
             if command == "details":
-                print("details")
+                    print("details")
 
             if command == "buy":
                 print("buy")
