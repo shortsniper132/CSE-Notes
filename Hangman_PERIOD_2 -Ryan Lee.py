@@ -22,7 +22,7 @@ guesses_number = 10
 subtracted = 1
 random_word = random.choice(word_bank)
 list(random_word)
-letters_guessed = []
+letters_guessed = [""]
 
 while True:
     # Print out the *s

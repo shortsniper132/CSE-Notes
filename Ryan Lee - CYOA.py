@@ -245,8 +245,11 @@ class Apple(Food):
 apple = Apple("apple", 5, 5)
 
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 class Character(object):
-    def __init__(self, character_name, health, inventory, coin):
+    def __init__(self, character_name, health, inventory, coin, equip):
         self.name = character_name
         self.health = health
         self.inventory = inventory
@@ -272,12 +275,19 @@ class Health(Character):
 class Inventory(Character):
     def __init__(self, inventory):
         super(Inventory, self). __init__(None, None, inventory, None)
+        inventory = []
+
+        while True:
+            inventory.append(Inventory)
 
 
 class Coins(Character):
     def __init__(self, coin):
         super(Coins, self). __init__(None, None, None, coin)
     coin = 0
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 class Enemies(object):
@@ -390,6 +400,11 @@ class END(Enemies):
 
 
 e = END("END", 5000, -100, 0)
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 shop_item = [StoneSword, IronSword, BoneSword, AxeOfFlame, ChillingSpear, LegendarySword, Lurker, FreezingRapier,
              GreatAxe, Blazer, BigFlame, LegendaryAxe, InfinityScythe, ShadowBlade, Apple, Bread, HealthP, SuperHealthP]
 
@@ -629,6 +644,10 @@ shop = Room("Forgotten Shop", None, None, None, None, None, "ruin1",
 battleANUBIS = Room("UNDERWORLD", None, None, None, None, None, None,
                     "You entered battle mode!  There is an enemy.  < ANUBIS >", None, "evade", "attack", None, Anubis)
 
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
 current_node = guide
 DIRECTIONS = ["north", "east", "south", "west", "up", "down", "battle", "shop"]
 short_directions = ["n", "e", "s", "w", "u", "d"]
@@ -640,6 +659,8 @@ while True:
     print()
     print("---------------------------------------------------------------------------------------------------")
     print()
+    if current_node == combat_training:
+        wooden_sword = True
     if command == "look":
         print(current_node.look)
         print()
@@ -706,20 +727,21 @@ while True:
         exit(0)
 
     if battle1 == current_node:
-        SandSlime = True
-        if SandSlime is True:
-            print("The sand slime attacked!")
-            print()
-            print("---------------------------------------------------------------------------------------------------")
-            print()
-            print("Your health is at %d." %)
         if command == "evade":
             print("You avoided the enemy's attack.")
+            print()
+            print("The sand slime attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
         if command == "attack":
             print("You attacked the enemy.")
+            print("The health of the Sand Slime is 0.")
+            print()
+            print("The Sand Slime attacked!")
+            print("Your health is at %d." % Health.health)
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
