@@ -1,8 +1,62 @@
 command = input
 
-
-print("Type (help) to look at the guide.")
+print("GUIDE:")
 print()
+print("Use (n), (w), (e), (s) to move around as for short directions.  Use (north), (west), (east), and (south)"
+      " for directions.  Type (look) to look for the description of a room.  Type (inventory) to check the item"
+      " that you want to use.")
+print()
+print("You can battle an enemy by typing (battle).")
+print()
+print("To get an item, simply type (shop) in RUIN-1.")
+print()
+print("---------------------------------------------------------------------------------------------------")
+print()
+
+class Character(object):
+    def __init__(self, character_name, health, inventory, coin, equip):
+        self.name = character_name
+        self.health = health
+        self.inventory = inventory
+        self.coin = coin
+        self.equip = equip
+
+
+class Name(Character):
+    def __init__(self, character_name):
+        super(Name, self). __init__(character_name, None, None, None, None)
+        self.character_name = character_name
+        name = ""
+
+
+class Health(Character):
+    def __init__(self, health):
+        super(Health, self). __init__(None, health, None, None, None)
+
+    health = 100
+    if health == 0:
+        print("You were killed.")
+        quit(0)
+
+
+class Inventory(Character):
+    def __init__(self, inventory):
+        super(Inventory, self). __init__(None, None, inventory, None, None)
+        inventory = []
+
+        while True:
+            inventory.append(Inventory)
+
+
+class Coins(Character):
+    def __init__(self, coin):
+        super(Coins, self). __init__(None, None, None, coin, None)
+    coin = 0
+
+
+class Equip(Character):
+    def __init__(self, equip):
+        super(Equip, self). __init__(None, None, None, None, equip)
 
 
 class Room(object):
@@ -30,9 +84,6 @@ class Item(object):
     def __init__(self, name):
         self.name = name
 
-    def pick_up(self):
-        print("You picked up the %s." % self.name)
-
 
 class Weapon(Item):
     def __init__(self, name, damage, cost):
@@ -47,6 +98,9 @@ class WoodenSword(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 wooden_sword = WoodenSword("wooden sword", 5, None)
 
@@ -56,6 +110,9 @@ class StoneSword(Weapon):
         super(StoneSword, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 stone_sword = StoneSword("stone sword", 15, 25)
@@ -67,6 +124,9 @@ class IronSword(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 iron_sword = IronSword("iron sword", 25, 50)
 
@@ -76,6 +136,9 @@ class BoneSword(Weapon):
         super(BoneSword, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 bone_sword = BoneSword("bone sword", 40, 75)
@@ -87,6 +150,9 @@ class AxeOfFlame(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 axe_of_flame = AxeOfFlame("axe of flame", 55, 100)
 
@@ -96,6 +162,9 @@ class ChillingSpear(Weapon):
         super(ChillingSpear, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 chilling_spear = ChillingSpear("chilling spear", 65, 175)
@@ -107,6 +176,9 @@ class LegendarySword(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 legendary_sword = LegendarySword("legendary sword", 80, 300)
 
@@ -116,6 +188,9 @@ class Lurker(Weapon):
         super(Lurker, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 lurker = Lurker("lurker", 100, 400)
@@ -127,6 +202,9 @@ class FreezingRapier(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 freezing_rapier = FreezingRapier("freezing rapier", 135, 480)
 
@@ -136,6 +214,9 @@ class GreatAxe(Weapon):
         super(GreatAxe, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 great_axe = GreatAxe("great axe", 170, 560)
@@ -147,6 +228,9 @@ class Blazer(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 blazer = Blazer("blazer", 230, 700)
 
@@ -156,6 +240,9 @@ class BigFlame(Weapon):
         super(BigFlame, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 big_flame = BigFlame("big flame", 320, 900)
@@ -167,6 +254,9 @@ class LegendaryAxe(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 legendary_axe = LegendaryAxe("legendary axe", 450, 1500)
 
@@ -177,6 +267,9 @@ class InfinityScythe(Weapon):
         self.dmg = damage
         self.cost = cost
 
+    def attack(self):
+        print("You attacked the enemy!")
+
 
 infinity_scythe = InfinityScythe("infinity scythe", 600, 2000)
 
@@ -186,6 +279,9 @@ class ShadowBlade(Weapon):
         super(ShadowBlade, self). __init__(name, damage, cost)
         self.dmg = damage
         self.cost = cost
+
+    def attack(self):
+        print("You attacked the enemy!")
 
 
 shadow_blade = ShadowBlade("shadow blade", 1000, 3000)
@@ -208,6 +304,9 @@ class HealthP(Container):
     def __init__(self, name, health_give, cost):
         super(HealthP, self). __init__(name, health_give, cost)
 
+    def drink(self):
+        print("You drank the < HEALTH POTION >")
+
 
 health_p = HealthP("health potion", 15, 15)
 
@@ -215,6 +314,9 @@ health_p = HealthP("health potion", 15, 15)
 class SuperHealthP(Container):
     def __init__(self, name, health_give, cost):
         super(SuperHealthP, self). __init__(name, health_give, cost)
+
+    def drink(self):
+        print("You drank the < SUPER HEALTH POTION >")
 
 
 super_health_p = SuperHealthP("super health potion", 50, 50)
@@ -232,6 +334,9 @@ class Bread(Food):
         super(Bread, self). __init__(name, health_give, cost)
         self.health = health_give
 
+    def eat(self):
+        print("You ate the < BREAD >")
+
 
 bread = Bread("bread", 7, 7)
 
@@ -240,6 +345,9 @@ class Apple(Food):
     def __init__(self, name, health_give, cost):
         super(Apple, self). __init__(name, health_give, cost)
         self.health = health_give
+
+    def eat(self):
+        print("You ate the < APPLE >")
 
 
 apple = Apple("apple", 5, 5)
@@ -260,6 +368,13 @@ class SandSlime(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(SandSlime, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Sand Slime attacked!")
+        Health.health-2
+
+    def death(self):
+        print("The Sand Slime was defeated...")
+
 
 ss = SandSlime("Sand Slime", 30, -2, 2)
 
@@ -267,6 +382,12 @@ ss = SandSlime("Sand Slime", 30, -2, 2)
 class UndeadMummy(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(UndeadMummy, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("The Undead Mummy attacked!")
+
+    def death(self):
+        print("The Undead Mummy was defeated...")
 
 
 um = UndeadMummy("Undead Mummy", 60, -5, 3)
@@ -276,6 +397,12 @@ class Skeleton(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(Skeleton, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Skeleton attacked!")
+
+    def death(self):
+        print("The Skeleton was defeated...")
+
 
 s = Skeleton("Skeleton", 90, -3, 4)
 
@@ -283,6 +410,12 @@ s = Skeleton("Skeleton", 90, -3, 4)
 class EyeShot(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(EyeShot, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("The Eye Shot attacked!")
+
+    def death(self):
+        print("The Eye Shot was defeated...")
 
 
 es = EyeShot("Eye Shot", 50, -15, 4)
@@ -292,6 +425,12 @@ class Carnage(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(Carnage, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Carnage attacked!")
+
+    def death(self):
+        print("The Carnage was defeated...")
+
 
 c = Carnage("Carnage", 350, -6, 5)
 
@@ -299,6 +438,12 @@ c = Carnage("Carnage", 350, -6, 5)
 class SuperMummy(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(SuperMummy, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("The Super Mummy attacked!")
+
+    def death(self):
+        print("The Super Mummy was defeated...")
 
 
 sm = SuperMummy("Super Mummy", 500, -5, 7)
@@ -308,6 +453,12 @@ class Destroyer(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(Destroyer, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Destroyer attacked!")
+
+    def death(self):
+        print("The Destroyer was defeated...")
+
 
 d = Destroyer("Destroyer", 750, -3, 9)
 
@@ -315,6 +466,12 @@ d = Destroyer("Destroyer", 750, -3, 9)
 class GoatMan(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(GoatMan, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("The Goat Man attacked!")
+
+    def death(self):
+        print("The Goat Man was defeated...")
 
 
 gm = GoatMan("Goat Man", 1500, -10, 13)
@@ -324,6 +481,12 @@ class UndeadGolem(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(UndeadGolem, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Undead Golem attacked!")
+
+    def death(self):
+        print("The Undead Golem was defeated...")
+
 
 ug = UndeadGolem("Undead Golem", 2000, -15, 25)
 
@@ -331,6 +494,12 @@ ug = UndeadGolem("Undead Golem", 2000, -15, 25)
 class ShadowDemon(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(ShadowDemon, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("The Shadow Demon attacked!")
+
+    def death(self):
+        print("The Shadow Demon was defeated...")
 
 
 sd = ShadowDemon("Shadow Demon", 4000, -5, 35)
@@ -340,6 +509,12 @@ class Wraith(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(Wraith, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("The Wraith attacked!")
+
+    def death(self):
+        print("The Wraith was defeated...")
+
 
 w = Wraith("Wraith", 8000, -25, 0)
 
@@ -347,6 +522,12 @@ w = Wraith("Wraith", 8000, -25, 0)
 class Anubis(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(Anubis, self).__init__(name, health, damage, coin_drop)
+
+    def attack(self):
+        print("Anubis attacked!")
+
+    def death(self):
+        print("Anubis was defeated...")
 
 
 a = Anubis("Anubis", 300000, -10, 0)
@@ -356,54 +537,14 @@ class END(Enemies):
     def __init__(self, name, health, damage, coin_drop):
         super(END, self).__init__(name, health, damage, coin_drop)
 
+    def attack(self):
+        print("END attacked!")
+
+    def death(self):
+        print("END was defeated...")
+
 
 e = END("END", 5000, -100, 0)
-
-
-class Character(object):
-    def __init__(self, character_name, health, inventory, coin, equip):
-        self.name = character_name
-        self.health = health
-        self.inventory = inventory
-        self.coin = coin
-        self.equip = equip
-
-
-class Name(Character):
-    def __init__(self, character_name):
-        super(Name, self). __init__(character_name, None, None, None, None)
-        self.character_name = character_name
-        name = "Poke"
-
-
-class Health(Character):
-    def __init__(self, health):
-        super(Health, self). __init__(None, health, None, None, None)
-        self.health = health
-    health = 100
-    if health == 0:
-        print("You were killed.")
-        quit(0)
-
-
-class Inventory(Character):
-    def __init__(self, inventory):
-        super(Inventory, self). __init__(None, None, inventory, None, None)
-        inventory = []
-
-        while True:
-            inventory.append(Inventory)
-
-
-class Coins(Character):
-    def __init__(self, coin):
-        super(Coins, self). __init__(None, None, None, coin, None)
-    coin = 0
-
-
-class Equip(Character):
-    def __init__(self, equip):
-        super(Equip, self). __init__(None, None, None, None, equip)
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -673,31 +814,6 @@ while True:
     if command == "quit":
         print("You quit the game...")
         quit(0)
-    if command == "help":
-        print()
-        print("---------------------------------------------------------------------------------------------------")
-        print()
-        print("GUIDE:")
-        print("Use (n), (w), (e), (s) to move around as for short directions.  Use (north), (west), (east), and (south)"
-              " for directions.  Type (look) to look for the description of a room.  Type (inventory) to check the item"
-              " that you want to use.")
-        print()
-        print("---------------------------------------------------------------------------------------------------")
-        print()
-        print("You can battle an enemy by typing (battle).")
-        print()
-        print("---------------------------------------------------------------------------------------------------")
-        print()
-        print("To get an item, simply type (shop) in RUIN-1.")
-        print()
-        print("---------------------------------------------------------------------------------------------------")
-        print()
-
-    if ruin17 == current_node:
-        print("You hear a loud scream up ahead...")
-        print()
-        print("---------------------------------------------------------------------------------------------------")
-        print()
 
     if endBOSS == current_node:
         print("END:  It seems you've found me... I shouldn't let you win, prepare to taste defeat!")
@@ -735,7 +851,7 @@ while True:
         if command == "evade":
             print("You avoided the enemy's attack.")
             print()
-            print("The sand slime attacked!")
+            print(SandSlime.attack(ss))
             print("It missed!")
             print("Your health is at %d." % Health.health)
             print()
@@ -771,12 +887,11 @@ while True:
                 print()
                 print("-----------------------------------------------------------------------------------------------")
                 print()
-            choice = ["details", "buy"]
-            if command == "details":
+                if command == "details":
                     print("details")
 
-            if command == "buy":
-                print("buy")
+                if command == "buy":
+                    print("buy")
 
     elif command in short_directions:
         position = short_directions.index(command)
