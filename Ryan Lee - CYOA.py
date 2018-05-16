@@ -248,48 +248,6 @@ apple = Apple("apple", 5, 5)
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-class Character(object):
-    def __init__(self, character_name, health, inventory, coin, equip):
-        self.name = character_name
-        self.health = health
-        self.inventory = inventory
-        self.coin = coin
-
-
-class Name(Character):
-    def __init__(self, character_name):
-        super(Name, self). __init__(character_name, None, None, None)
-        self.character_name = character_name
-
-
-class Health(Character):
-    def __init__(self, health):
-        super(Health, self). __init__(None, health, None, None)
-        self.health = health
-    health = 100
-    if health == 0:
-        print("You were killed.")
-        quit(0)
-
-
-class Inventory(Character):
-    def __init__(self, inventory):
-        super(Inventory, self). __init__(None, None, inventory, None)
-        inventory = []
-
-        while True:
-            inventory.append(Inventory)
-
-
-class Coins(Character):
-    def __init__(self, coin):
-        super(Coins, self). __init__(None, None, None, coin)
-    coin = 0
-
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
 class Enemies(object):
     def __init__(self, name, health, damage, coin_drop):
         self.name = name
@@ -402,6 +360,52 @@ class END(Enemies):
 e = END("END", 5000, -100, 0)
 
 
+class Character(object):
+    def __init__(self, character_name, health, inventory, coin, equip):
+        self.name = character_name
+        self.health = health
+        self.inventory = inventory
+        self.coin = coin
+        self.equip = equip
+
+
+class Name(Character):
+    def __init__(self, character_name):
+        super(Name, self). __init__(character_name, None, None, None, None)
+        self.character_name = character_name
+        name = "Poke"
+
+
+class Health(Character):
+    def __init__(self, health):
+        super(Health, self). __init__(None, health, None, None, None)
+        self.health = health
+    health = 100
+    if health == 0:
+        print("You were killed.")
+        quit(0)
+
+
+class Inventory(Character):
+    def __init__(self, inventory):
+        super(Inventory, self). __init__(None, None, inventory, None, None)
+        inventory = []
+
+        while True:
+            inventory.append(Inventory)
+
+
+class Coins(Character):
+    def __init__(self, coin):
+        super(Coins, self). __init__(None, None, None, coin, None)
+    coin = 0
+
+
+class Equip(Character):
+    def __init__(self, equip):
+        super(Equip, self). __init__(None, None, None, None, equip)
+
+
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
@@ -412,7 +416,7 @@ shop_itemNAMES = ["Stone Sword", "Iron Sword", "Bone Sword", "Axe Of Flame", "Ch
                   "Lurker", "Freezing Rapier", "Great Axe", "Blazer", "Big Flame", "Legendary Axe", "Infinity Scythe",
                   "Shadow Blade", "Apple", "Bread", "Health Potion", "Super Health Potion"]
 
-guide = Room("Guide Room", 'combat_training', None, None, None, None, None,
+guide = Room("Guide Room", "combat_training", None, None, None, None, None,
              "Hello and welcome to RUIN.  In this game, you'll be working your way to find the exit.  Go ahead and "
              "type in (north) or (n) to move onto the next place.", None, None, None, None, None)
 
@@ -422,7 +426,7 @@ combat_training = Room("Combat Training", None, None, None, None, None, "ruin1",
                        "the portal if you do not need the tutorial.", "battle1", None, None, None, None)
 
 battle1 = Room("Battle Mode", None, None, None, None, None, "combat_training",
-               "You entered a battle mode!  Type (evade) to avoid the attack.  You can attack by typing (sword). "
+               "You entered a battle mode!  Type (evade) to avoid the attack.  You can attack by typing (attack). "
                " Take this wooden sword!  Type (down), or (d), to escape the battle.  There is a LVL 0  enemy.  "
                "< SAND SLIME >", None, "evade", "attack", None, SandSlime)
 
@@ -570,7 +574,7 @@ battle17 = Room("Battle Mode", None, None, None, None, None, "ruin17",
                 "You entered battle mode!  There is a LVL 6 enemy.  < DESTROYER >", None, "evade", "attack", None,
                 Destroyer)
 
-ruin18 = Room("RUIN-118", "ruin19", None, None, "ruin17", None, None,
+ruin18 = Room("RUIN-18", "ruin19", None, None, "ruin17", None, None,
               "You entered RUIN-18, there's a path to the north and south.  There is an enemy.",
               "battle18", None, None, None, None)
 
@@ -586,7 +590,7 @@ battle19 = Room("Battle Mode", None, None, None, None, None, "ruin19",
                 "You entered battle mode!  There is a LVL 7 enemy.  < GOAT MAN >", None, "evade", "attack", None,
                 GoatMan)
 
-ruin20 = Room("RUIN-20", None, "ruin17", "ruin21", None, None, None,
+ruin20 = Room("RUIN-20", None, "ruin19", "ruin21", None, None, None,
               "You entered RUIN-20, there's a path to the west and east.  There is an enemy.",
               "battle20", None, None, None, None)
 
@@ -675,7 +679,8 @@ while True:
         print()
         print("GUIDE:")
         print("Use (n), (w), (e), (s) to move around as for short directions.  Use (north), (west), (east), and (south)"
-              " for directions.  Type (look) to look for the description of a room.")
+              " for directions.  Type (look) to look for the description of a room.  Type (inventory) to check the item"
+              " that you want to use.")
         print()
         print("---------------------------------------------------------------------------------------------------")
         print()
@@ -741,7 +746,7 @@ while True:
             print("The health of the Sand Slime is 0.")
             print()
             print("The Sand Slime attacked!")
-            print("Your health is at %d." % Health.health)
+            print("Your health is at %d" % Health.health)
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
