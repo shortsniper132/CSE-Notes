@@ -1,3 +1,4 @@
+import random
 command = input
 print()
 print("GUIDE:")
@@ -90,7 +91,7 @@ class Item(object):
 class Weapon(Item):
     def __init__(self, name, damage, cost):
         super(Weapon, self). __init__(name)
-        self.dmg = damage
+        self.damage = damage
         self.cost = cost
 
 
@@ -377,12 +378,10 @@ class SandSlime(Enemies):
         print("The Sand Slime was defeated...")
         Coins.coin = +2
 
-    def health_enemy1(self):
-        health = 100
+    health1 = 30
 
 
 ss = SandSlime("Sand Slime", 30, -2, 2)
-ss.death()
 
 
 class UndeadMummy(Enemies):
@@ -394,6 +393,8 @@ class UndeadMummy(Enemies):
 
     def death(self):
         print("The Undead Mummy was defeated...")
+
+    health1 = 60
 
 
 um = UndeadMummy("Undead Mummy", 60, -5, 3)
@@ -409,6 +410,8 @@ class Skeleton(Enemies):
     def death(self):
         print("The Skeleton was defeated...")
 
+    health1 = 90
+
 
 s = Skeleton("Skeleton", 90, -3, 4)
 
@@ -422,6 +425,8 @@ class EyeShot(Enemies):
 
     def death(self):
         print("The Eye Shot was defeated...")
+
+    health1 = 50
 
 
 es = EyeShot("Eye Shot", 50, -15, 4)
@@ -437,6 +442,8 @@ class Carnage(Enemies):
     def death(self):
         print("The Carnage was defeated...")
 
+    health1 = 350
+
 
 c = Carnage("Carnage", 350, -6, 5)
 
@@ -450,6 +457,8 @@ class SuperMummy(Enemies):
 
     def death(self):
         print("The Super Mummy was defeated...")
+
+    health1 = 500
 
 
 sm = SuperMummy("Super Mummy", 500, -5, 7)
@@ -465,6 +474,8 @@ class Destroyer(Enemies):
     def death(self):
         print("The Destroyer was defeated...")
 
+    health1 = 750
+
 
 d = Destroyer("Destroyer", 750, -3, 9)
 
@@ -478,6 +489,8 @@ class GoatMan(Enemies):
 
     def death(self):
         print("The Goat Man was defeated...")
+
+    health1 = 1500
 
 
 gm = GoatMan("Goat Man", 1500, -10, 13)
@@ -493,6 +506,8 @@ class UndeadGolem(Enemies):
     def death(self):
         print("The Undead Golem was defeated...")
 
+    health1 = 2000
+
 
 ug = UndeadGolem("Undead Golem", 2000, -15, 25)
 
@@ -506,6 +521,8 @@ class ShadowDemon(Enemies):
 
     def death(self):
         print("The Shadow Demon was defeated...")
+
+    health1 = 4000
 
 
 sd = ShadowDemon("Shadow Demon", 4000, -5, 35)
@@ -521,6 +538,8 @@ class Wraith(Enemies):
     def death(self):
         print("The Wraith was defeated...")
 
+    health1 = 8000
+
 
 w = Wraith("Wraith", 8000, -25, 0)
 
@@ -535,6 +554,8 @@ class Anubis(Enemies):
     def death(self):
         print("Anubis was defeated...")
 
+    health1 = 300000
+
 
 a = Anubis("Anubis", 300000, -10, 0)
 
@@ -548,6 +569,8 @@ class END(Enemies):
 
     def death(self):
         print("END was defeated...")
+
+    health1 = 5000
 
 
 e = END("END", 5000, -50, 0)
@@ -882,24 +905,97 @@ while True:
     if exit0 == current_node:
         exit(0)
 
+    damage = "The Sand Slime attack!"
+    avoid = "The Sand Slime avoided your attack!"
+    enemy_option = [damage, avoid]
+    if damage == random.randrange(len(enemy_option)):
+        print(damage)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 2
+
+    if avoid == random.randrange(len(enemy_option)):
+        print(avoid)
+        SandSlime.health1 += 5
+
     if battle1 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+            print("The Sand Slime attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+            print("You attacked the enemy!")
+            SandSlime.health1 -= 5
+            rand_option = enemy_option[random.randrange(len(enemy_option))]
+            if rand_option == damage:
+                print(damage)
+                Health.health -= 2
+                print("The health of the Sand Slime is at %d." % SandSlime.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid:
+                print(avoid)
+                SandSlime.health1 += 5
+                print("The health of the Sand Slime is at %d." % SandSlime.health1)
+                print("Your health is at %d." % Health.health)
+
+            if SandSlime.health1 <= 0:
+                ss.death()
+                ss.coin_drop += Coins.coin
+                print("You earned %d gold." % ss.coin_drop)
+                current_node = combat_training
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                print("Congratulations, you beat the Sand Slime.  You now know how to battle enemies and defeat "
+                      "them.  Type in (d) or (down) and head onto RUIN-1.")
+                sand_slime = False
+                current_node = combat_training
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+    if battleANUBIS == current_node:
         if command == "evade":
             print("You avoided the enemy's attack.")
             print()
-            print(SandSlime.attack(ss))
             print("It missed!")
             print("Your health is at %d." % Health.health)
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
         if command == "attack":
-            Health.health -= 2
+            Health.health -= 10
             print("You attacked the enemy.")
-            print("The health of the Sand Slime is %d." % SandSlime.health_enemy1(SandSlime))
+            Anubis.health1 -= 5
+            print("The health of Anubis is %d." % Anubis.health1)
             print()
-            print("The Sand Slime attacked!")
-            print("Your health is at %d" % Health.health)
-            if Health.health == 0:
+            print("Anubis attacked!")
+            print("Your health is at %d." % Health.health)
+            if Anubis.health1 <= 0:
+                a.death()
+                print()
+                current_node = ruin1
+            if Health.health <= 0:
                 print("You were killed.")
                 quit(0)
             print()
@@ -953,9 +1049,9 @@ while True:
 
     if shop == current_node:
         if command == "buy":
-
             print("SHOP ITEM:")
             print(shop_itemNAMES)
+
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
@@ -963,16 +1059,17 @@ while True:
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            input("SHOP KEEPER:  What do you want?  CHAT:  >_")
+            user_choice = str(input("SHOP KEEPER:  What do you want?  CHAT:  >_"))
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            if command == "stone sword":
-                if Coins.coin != stone_sword.cost:
-                    print("You don't have enough coins for that.")
-            if command == "stone sword":
-                if Coins.coin == stone_sword.cost:
-                    print("You bought the stone sword.")
+            shop_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+                            "18"]
+            if user_choice == "1":
+                if Coins.coin >= stone_sword.cost:
+                    print("You bought the < STONE SWORD >.")
+                else:
+                    print("You cannot buy that.")
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
