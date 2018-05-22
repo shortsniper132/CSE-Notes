@@ -922,6 +922,7 @@ while True:
             print("The Sand Slime attacked!")
             print("Your health is at %d." % Health.health)
             if SandSlime.health1 <= 0:
+                current_node = combat_training
                 ss.death()
                 print()
                 print("Congratulations, you beat the Sand Slime.  You now know how to battle enemies and defeat them.  "
@@ -953,6 +954,7 @@ while True:
             if Anubis.health1 <= 0:
                 a.death()
                 print()
+                current_node = ruin1
             if Health.health <= 0:
                 print("You were killed.")
                 quit(0)
@@ -1007,9 +1009,9 @@ while True:
 
     if shop == current_node:
         if command == "buy":
-
             print("SHOP ITEM:")
             print(shop_itemNAMES)
+
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
@@ -1017,16 +1019,17 @@ while True:
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            input("SHOP KEEPER:  What do you want?  CHAT:  >_")
+            user_choice = str(input("SHOP KEEPER:  What do you want?  CHAT:  >_"))
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            if command == "stone sword":
-                if Coins.coin != stone_sword.cost:
-                    print("You don't have enough coins for that.")
-            if command == "stone sword":
-                if Coins.coin == stone_sword.cost:
-                    print("You bought the stone sword.")
+            shop_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+                            "18"]
+            if user_choice == "1":
+                if Coins.coin >= stone_sword.cost:
+                    print("You bought the < STONE SWORD >.")
+                else:
+                    print("You cannot buy that.")
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
