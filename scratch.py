@@ -51,10 +51,11 @@ class Inventory(Character):
 class Coins(Character):
     def __init__(self, coin):
         super(Coins, self). __init__(None, None, None, coin, None)
-        Coins.gold = 1000000000000
+
+    coin_gold = 100
 
 
-cc = Coins(10000000000000000000000)
+cc = Coins(0)
 
 
 class Equip(Character):
@@ -118,8 +119,10 @@ class StoneSword(Weapon):
     def attack(self):
         print("You attacked the enemy!")
 
+    cost = -25
 
-stone_sword = StoneSword("stone sword", 15, 25)
+
+stone_sword = StoneSword("stone sword", 15, -25)
 
 
 class IronSword(Weapon):
@@ -342,7 +345,7 @@ class Bread(Food):
         print("You ate the < BREAD >")
 
 
-bread = Bread("bread", 10, 20)
+bread = Bread("bread", 20, 10)
 
 
 class Apple(Food):
@@ -354,7 +357,7 @@ class Apple(Food):
         print("You ate the < APPLE >")
 
 
-apple = Apple("apple", 5, 10)
+apple = Apple("apple", 10, 5)
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -417,6 +420,8 @@ class Skeleton(Enemies):
 
     health1 = 90
 
+    coin1 = +4
+
 
 s = Skeleton("Skeleton", 90, -3, 4)
 
@@ -433,8 +438,10 @@ class EyeShot(Enemies):
 
     health1 = 50
 
+    coin1 = +5
 
-es = EyeShot("Eye Shot", 50, -15, 4)
+
+es = EyeShot("Eye Shot", 50, -15, 5)
 
 
 class Carnage(Enemies):
@@ -449,8 +456,10 @@ class Carnage(Enemies):
 
     health1 = 350
 
+    coin1 = +5
 
-c = Carnage("Carnage", 350, -6, 5)
+
+c = Carnage("Carnage", 350, -6, 6)
 
 
 class SuperMummy(Enemies):
@@ -464,6 +473,8 @@ class SuperMummy(Enemies):
         print("The Super Mummy was defeated...")
 
     health1 = 500
+
+    coin1 = +7
 
 
 sm = SuperMummy("Super Mummy", 500, -5, 7)
@@ -481,6 +492,8 @@ class Destroyer(Enemies):
 
     health1 = 750
 
+    coin1 = +9
+
 
 d = Destroyer("Destroyer", 750, -3, 9)
 
@@ -496,6 +509,8 @@ class GoatMan(Enemies):
         print("The Goat Man was defeated...")
 
     health1 = 1500
+
+    coin1 = +13
 
 
 gm = GoatMan("Goat Man", 1500, -10, 13)
@@ -513,6 +528,8 @@ class UndeadGolem(Enemies):
 
     health1 = 2000
 
+    coin1 = +25
+
 
 ug = UndeadGolem("Undead Golem", 2000, -15, 25)
 
@@ -528,6 +545,8 @@ class ShadowDemon(Enemies):
         print("The Shadow Demon was defeated...")
 
     health1 = 4000
+
+    coin1 = +35
 
 
 sd = ShadowDemon("Shadow Demon", 4000, -5, 35)
@@ -545,6 +564,8 @@ class Wraith(Enemies):
 
     health1 = 8000
 
+    coin1 = +0
+
 
 w = Wraith("Wraith", 8000, -25, 0)
 
@@ -560,6 +581,8 @@ class Anubis(Enemies):
         print("Anubis was defeated...")
 
     health1 = 300000
+
+    coin1 = +0
 
 
 a = Anubis("Anubis", 300000, -10, 0)
@@ -577,6 +600,8 @@ class END(Enemies):
 
     health1 = 5000
 
+    coin1 = +0
+
 
 e = END("END", 5000, -50, 0)
 
@@ -587,10 +612,11 @@ e = END("END", 5000, -50, 0)
 shop_item = [StoneSword, IronSword, BoneSword, AxeOfFlame, ChillingSpear, LegendarySword, Lurker, FreezingRapier,
              GreatAxe, Blazer, BigFlame, LegendaryAxe, InfinityScythe, ShadowBlade, Apple, Bread, HealthP, SuperHealthP]
 
-shop_itemNAMES = ["(1) Stone Sword", "(2) Iron Sword", "(3) Bone Sword", "(4) Axe Of Flame", "(5) Chilling Spear",
-                  "(6) Legendary Sword", "(7) Lurker", "(8) Freezing Rapier", "(9) Great Axe", "(10) Blazer",
-                  "(11) Big Flame", "(12) Legendary Axe", "(13) Infinity Scythe",
-                  "(14) Shadow Blade", "(15) Apple", "(16) Bread", "(17) Health Potion", "(18) Super Health Potion"]
+shop_itemNAMES = [" (1) Stone Sword", " (2) Iron Sword", " (3) Bone Sword", " (4) Axe Of Flame", " (5) Chilling Spear",
+                  " (6) Legendary Sword", " (7) Lurker", " (8) Freezing Rapier", " (9) Great Axe", " (10) Blazer",
+                  " (11) Big Flame", " (12) Legendary Axe", " (13) Infinity Scythe",
+                  " (14) Shadow Blade", " (15) Apple", " (16) Bread", " (17) Health Potion",
+                  " (18) Super Health Potion"]
 
 guide = Room("Guide Room", "combat_training", None, None, None, None, None,
              "Hello and welcome to RUIN.  In this game, you'll be working your way to find the exit.  Go ahead and "
@@ -911,17 +937,23 @@ while True:
     if exit0 == current_node:
         exit(0)
 
-    damage = "The Sand Slime attack!"
-    avoid = "The Sand Slime avoided your attack!"
-    enemy_option = [damage, avoid]
-    if damage == random.randrange(len(enemy_option)):
-        print(damage)
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage1 = "The Sand Slime attacked!"
+    avoid1 = "The Sand Slime avoided your attack!"
+    nothing1 = "The Sand Slime did nothing."
+    enemy_option1 = [damage1, avoid1, nothing1]
+    if damage1 == random.randrange(len(enemy_option1)):
+        print(damage1)
         print("Your health is at %d." % Health.health)
         Health.health -= 2
 
-    if avoid == random.randrange(len(enemy_option)):
-        print(avoid)
+    if avoid1 == random.randrange(len(enemy_option1)):
+        print(avoid1)
         SandSlime.health1 += 5
+
+    if nothing1 == random.randrange(len(enemy_option1)):
+        print(nothing1)
 
     if battle1 == current_node:
         if command == "evade":
@@ -947,22 +979,26 @@ while True:
             time.sleep(3)
 
             print("You attacked the enemy!")
-            SandSlime.health1 -= 30
-            rand_option = enemy_option[random.randrange(len(enemy_option))]
-            if rand_option == damage:
-                print(damage)
+            SandSlime.health1 -= 5
+            rand_option = enemy_option1[random.randrange(len(enemy_option1))]
+            if rand_option == damage1:
+                print(damage1)
                 Health.health -= 2
                 print("The health of the Sand Slime is at %d." % SandSlime.health1)
                 print("Your health is at %d." % Health.health)
-            if rand_option == avoid:
-                print(avoid)
+            if rand_option == avoid1:
+                print(avoid1)
                 SandSlime.health1 += 5
                 print("The health of the Sand Slime is at %d." % SandSlime.health1)
                 print("Your health is at %d." % Health.health)
+            if rand_option == nothing1:
+                print(nothing1)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Sand Slime is at %d." % SandSlime.health1)
 
             if SandSlime.health1 <= 0:
                 ss.death()
-                SandSlime.coin1 += Coins.gold
+                SandSlime.coin1 += Coins.coin_gold
                 print("You got %d coins." % ss.coin_drop)
                 current_node = ruin1
                 print()
@@ -970,7 +1006,6 @@ while True:
                 print()
                 print("Congratulations, you beat the Sand Slime.  You now know how to battle enemies and defeat "
                       "them")
-                sand_slime = False
                 SandSlime.health1 += 30
 
             if Health.health <= 0:
@@ -980,17 +1015,23 @@ while True:
             print("-----------------------------------------------------------------------------------------------")
             print()
 
-    damage1 = "The Undead Mummy attack!"
-    avoid1 = "The Undead Mummy avoided your attack!"
-    enemy_option1 = [damage1, avoid1]
-    if damage1 == random.randrange(len(enemy_option1)):
-        print(damage1)
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage2 = "The Undead Mummy attacked!"
+    avoid2 = "The Undead Mummy avoided your attack!"
+    nothing2 = "The Undead Mummy did nothing."
+    enemy_option2 = [damage2, avoid2, nothing2]
+    if damage2 == random.randrange(len(enemy_option2)):
+        print(damage2)
         print("Your health is at %d." % Health.health)
         Health.health -= 5
 
-    if avoid == random.randrange(len(enemy_option1)):
-        print(avoid1)
-        UndeadMummy.health1 += 30
+    if avoid2 == random.randrange(len(enemy_option2)):
+        print(avoid2)
+        UndeadMummy.health1 += 5
+
+    if nothing2 == random.randrange(len(enemy_option2)):
+        print(nothing2)
 
     if battle2 == current_node:
         if command == "evade":
@@ -1016,22 +1057,26 @@ while True:
             time.sleep(3)
 
             print("You attacked the enemy!")
-            UndeadMummy.health1 -= 30
-            rand_option1 = enemy_option1[random.randrange(len(enemy_option1))]
-            if rand_option1 == damage1:
-                print(damage1)
-                Health.health -= 2
+            UndeadMummy.health1 -= 5
+            rand_option = enemy_option2[random.randrange(len(enemy_option2))]
+            if rand_option == damage2:
+                print(damage2)
+                Health.health -= 5
                 print("The health of the Undead Mummy is at %d." % UndeadMummy.health1)
                 print("Your health is at %d." % Health.health)
-            if rand_option1 == avoid1:
-                print(avoid1)
+            if rand_option == avoid2:
+                print(avoid2)
                 UndeadMummy.health1 += 5
                 print("The health of the Undead Mummy is at %d." % UndeadMummy.health1)
                 print("Your health is at %d." % Health.health)
+            if rand_option == nothing2:
+                print(nothing2)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Undead Mummy is at %d." % UndeadMummy.health1)
 
             if UndeadMummy.health1 <= 0:
                 um.death()
-                UndeadMummy.coin1 += Coins.gold
+                UndeadMummy.coin1 += Coins.coin_gold
                 print("You got %d coins." % um.coin_drop)
                 print()
                 print("-------------------------------------------------------------------------------------------")
@@ -1044,6 +1089,464 @@ while True:
             print()
             print("-----------------------------------------------------------------------------------------------")
             print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage3 = "The Skeleton attacked!"
+    avoid3 = "The Skeleton avoided your attack!"
+    nothing3 = "The Skeleton did nothing."
+    enemy_option3 = [damage3, avoid3, nothing3]
+    if damage3 == random.randrange(len(enemy_option3)):
+        print(damage3)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 3
+
+    if avoid3 == random.randrange(len(enemy_option3)):
+        print(avoid3)
+        Skeleton.health1 += 5
+
+    if nothing3 == random.randrange(len(enemy_option3)):
+        print(nothing3)
+
+    if battle3 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+            time.sleep(3)
+
+            print("The Skeleton attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            Skeleton.health1 -= 5
+            rand_option = enemy_option3[random.randrange(len(enemy_option3))]
+            if rand_option == damage3:
+                print(damage3)
+                Health.health -= 3
+                print("The health of the Undead Mummy is at %d." % Skeleton.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid3:
+                print(avoid3)
+                Skeleton.health1 += 5
+                print("The health of the Skeleton is at %d." % Skeleton.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing3:
+                print(nothing3)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Skeleton is at %d." % Skeleton.health1)
+
+            if Skeleton.health1 <= 0:
+                s.death()
+                Skeleton.coin1 += Coins.coin_gold
+                print("You got %d coins." % s.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                Skeleton.health1 += 60
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage4 = "The Skeleton attacked!"
+    avoid4 = "The Skeleton avoided your attack!"
+    nothing4 = "The Skeleton did nothing."
+    enemy_option4 = [damage4, avoid4, nothing4]
+    if damage4 == random.randrange(len(enemy_option4)):
+        print(damage4)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 3
+
+    if avoid4 == random.randrange(len(enemy_option4)):
+        print(avoid4)
+        Skeleton.health1 += 5
+
+    if nothing4 == random.randrange(len(enemy_option4)):
+        print(nothing4)
+
+    if battle4 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+            time.sleep(3)
+
+            print("The Skeleton attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            Skeleton.health1 -= 5
+            rand_option = enemy_option4[random.randrange(len(enemy_option4))]
+            if rand_option == damage4:
+                print(damage4)
+                Health.health -= 3
+                print("The health of the Skeleton is at %d." % Skeleton.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid4:
+                print(avoid4)
+                Skeleton.health1 += 5
+                print("The health of the Skeleton is at %d." % Skeleton.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing4:
+                print(nothing4)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Skeleton is at %d." % Skeleton.health1)
+
+            if Skeleton.health1 <= 0:
+                s.death()
+                Skeleton.coin1 += Coins.coin_gold
+                print("You got %d coins." % s.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                Skeleton.health1 += 60
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage5 = "The Eye Shot attacked!"
+    avoid5 = "The Eye Shot avoided your attack!"
+    nothing5 = "The Eye Shot did nothing."
+    enemy_option5 = [damage5, avoid5, nothing5]
+    if damage5 == random.randrange(len(enemy_option5)):
+        print(damage5)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 15
+
+    if avoid5 == random.randrange(len(enemy_option5)):
+        print(avoid5)
+        EyeShot.health1 += 5
+
+    if nothing5 == random.randrange(len(enemy_option5)):
+        print(nothing5)
+
+    if battle5 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("The Eye Shot attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            EyeShot.health1 -= 5
+            rand_option = enemy_option5[random.randrange(len(enemy_option5))]
+            if rand_option == damage5:
+                print(damage5)
+                Health.health -= 15
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid5:
+                print(avoid5)
+                EyeShot.health1 += 5
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing5:
+                print(nothing5)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+            if EyeShot.health1 <= 0:
+                es.death()
+                EyeShot.coin1 += Coins.coin_gold
+                print("You got %d coins." % es.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                EyeShot.health1 += 50
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage6 = "The Eye Shot attacked!"
+    avoid6 = "The Eye Shot avoided your attack!"
+    nothing6 = "The Eye Shot did nothing."
+    enemy_option6 = [damage6, avoid6, nothing6]
+    if damage6 == random.randrange(len(enemy_option6)):
+        print(damage6)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 15
+
+    if avoid6 == random.randrange(len(enemy_option6)):
+        print(avoid6)
+        EyeShot.health1 += 5
+
+    if nothing6 == random.randrange(len(enemy_option6)):
+        print(nothing6)
+
+    if battle6 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("The Eye Shot attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            EyeShot.health1 -= 5
+            rand_option = enemy_option6[random.randrange(len(enemy_option6))]
+            if rand_option == damage6:
+                print(damage6)
+                Health.health -= 15
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid6:
+                print(avoid6)
+                EyeShot.health1 += 5
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing6:
+                print(nothing6)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+
+            if EyeShot.health1 <= 0:
+                es.death()
+                EyeShot.coin1 += Coins.coin_gold
+                print("You got %d coins." % es.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                EyeShot.health1 += 50
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage7 = "The Eye Shot attacked!"
+    avoid7 = "The Eye Shot avoided your attack!"
+    nothing7 = "The Eye Shot is doing nothing."
+    enemy_option7 = [damage7, avoid7, nothing7]
+    if damage7 == random.randrange(len(enemy_option7)):
+        print(damage7)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 15
+
+    if avoid7 == random.randrange(len(enemy_option7)):
+        print(avoid7)
+        EyeShot.health1 += 5
+
+    if nothing7 == random.randrange(len(enemy_option7)):
+        print(nothing7)
+
+    if battle7 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("The Eye Shot attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            EyeShot.health1 -= 5
+            rand_option = enemy_option7[random.randrange(len(enemy_option7))]
+            if rand_option == damage7:
+                print(damage7)
+                Health.health -= 15
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid7:
+                print(avoid7)
+                EyeShot.health1 += 5
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing7:
+                print(nothing7)
+                print("Your health is at %d." % Health.health)
+                print("The health of the Eye Shot is at %d." % EyeShot.health1)
+
+            if EyeShot.health1 <= 0:
+                es.death()
+                EyeShot.coin1 += Coins.coin_gold
+                print("You got %d coins." % es.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                EyeShot.health1 += 50
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    damage8 = "The Carnage attacked!"
+    avoid8 = "The Carnage avoided your attack!"
+    nothing8 = "The Carnage is doing nothing."
+    enemy_option8 = [damage8, avoid8, nothing8]
+    if damage8 == random.randrange(len(enemy_option8)):
+        print(damage8)
+        print("Your health is at %d." % Health.health)
+        Health.health -= 15
+
+    if avoid8 == random.randrange(len(enemy_option8)):
+        print(avoid8)
+        EyeShot.health1 += 5
+
+    if nothing8 == random.randrange(len(enemy_option8)):
+        print(nothing8)
+
+    if battle8 == current_node:
+        if command == "evade":
+            print("You are planning to avoid the enemy's attack...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("The Carnage attacked!")
+            print("It missed!")
+            print("Your health is at %d." % Health.health)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+        if command == "attack":
+            print("You are planning to attack the enemy...")
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+            import time
+
+            time.sleep(3)
+
+            print("You attacked the enemy!")
+            EyeShot.health1 -= 5
+            rand_option = enemy_option8[random.randrange(len(enemy_option8))]
+            if rand_option == damage8:
+                print(damage8)
+                Health.health -= 15
+                print("The health of the Eye Shot is at %d." % Carnage.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == avoid8:
+                print(avoid8)
+                Carnage.health1 += 5
+                print("The health of the Carnage is at %d." % Carnage.health1)
+                print("Your health is at %d." % Health.health)
+            if rand_option == nothing8:
+                print(nothing8)
+                print("Your health is at %d." % Health.health)
+
+            if Carnage.health1 <= 0:
+                c.death()
+                Carnage.coin1 += Coins.coin_gold
+                print("You got %d coins." % es.coin_drop)
+                print()
+                print("-------------------------------------------------------------------------------------------")
+                print()
+                Carnage.health1 += 50
+
+            if Health.health <= 0:
+                print("You were killed.")
+                quit(0)
+            print()
+            print("-----------------------------------------------------------------------------------------------")
+            print()
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     if shop == current_node:
         if command == "details":
@@ -1079,13 +1582,13 @@ while True:
             print()
             print("Shadow Blade:  < damage: 1000 >, < cost: 3000 >")
             print()
-            print("Apple:  < health gain: 10 >, < cost: 5 >")
+            print("Apple:  < health gain: 5 >, < cost: 5 >")
             print()
-            print("Bread:  < health gain: 20 >, < cost: 10 >")
+            print("Bread:  < health gain: 15 >, < cost: 15 >")
             print()
-            print("Health Potion:  < health gain: 35 >, < cost: 25 >")
+            print("Health Potion:  < health gain: 25 >, < cost: 25 >")
             print()
-            print("Super Health Potion:  < health gain: 50 >, < cost: 40 >")
+            print("Super Health Potion:  < health gain: 50 >, < cost: 50 >")
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
@@ -1098,125 +1601,124 @@ while True:
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            print("You have %d coins." % Coins.gold)
+            print("You have %d coins." % Coins.coin_gold)
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
-            user_choice = str(input("SHOP KEEPER:  What do you want?  Type in the number you want...  CHAT:  >_"))
+            user_choice = str(input("SHOP KEEPER:  What do you want?  CHAT:  >_"))
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
             shop_options = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
                             "18"]
-
             if user_choice == "1":
-                if Coins.gold >= stone_sword.cost:
+                if Coins.coin_gold >= stone_sword.cost:
+                    stone_sword.cost -= Coins.coin_gold
                     print("You bought the < STONE SWORD >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "2":
-                if Coins.gold >= iron_sword.cost:
+                if Coins.coin_gold >= iron_sword.cost:
                     print("You bought the < IRON SWORD >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "3":
-                if Coins.gold >= bone_sword.cost:
+                if Coins.coin_gold >= bone_sword.cost:
                     print("You bought the < BONE SWORD >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "4":
-                if Coins.gold >= axe_of_flame.cost:
+                if Coins.coin_gold >= axe_of_flame.cost:
                     print("You bought the < AXE OF FLAME >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "5":
-                if Coins.gold >= chilling_spear.cost:
+                if Coins.coin_gold >= chilling_spear.cost:
                     print("You bought the < CHILLING SPEAR >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "6":
-                if Coins.gold >= legendary_sword.cost:
-                    print("You bought the < LEGENDARY SWORD >.")
+                if Coins.coin_gold >= legendary_axe.cost:
+                    print("You bought the < LEGENDARY >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "7":
-                if Coins.gold >= lurker.cost:
+                if Coins.coin_gold >= lurker.cost:
                     print("You bought the < LURKER >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "8":
-                if Coins.gold >= freezing_rapier.cost:
+                if Coins.coin_gold >= freezing_rapier.cost:
                     print("You bought the < FREEZING RAPIER >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "9":
-                if Coins.gold >= great_axe.cost:
+                if Coins.coin_gold >= great_axe.cost:
                     print("You bought the < GREAT AXE >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "10":
-                if Coins.gold >= blazer.cost:
+                if Coins.coin_gold >= blazer.cost:
                     print("You bought the < BLAZER >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "11":
-                if Coins.gold >= big_flame.cost:
+                if Coins.coin_gold >= big_flame.cost:
                     print("You bought the < BIG FLAME >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "12":
-                if Coins.gold >= legendary_axe.cost:
+                if Coins.coin_gold >= legendary_axe.cost:
                     print("You bought the < LEGENDARY AXE >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "13":
-                if Coins.gold >= infinity_scythe.cost:
+                if Coins.coin_gold >= infinity_scythe.cost:
                     print("You bought the < INFINITY SCYTHE >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "14":
-                if Coins.gold >= shadow_blade.cost:
+                if Coins.coin_gold >= shadow_blade.cost:
                     print("You bought the < SHADOW BLADE >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "15":
-                if Coins.gold >= apple.cost:
+                if Coins.coin_gold >= apple.cost:
                     print("You bought the < APPLE >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "16":
-                if Coins.gold >= bread.cost:
+                if Coins.coin_gold >= bread.cost:
                     print("You bought the < BREAD >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "17":
-                if Coins.gold >= health_p.cost:
+                if Coins.coin_gold >= health_p.cost:
                     print("You bought the < HEALTH POTION >.")
                 else:
                     print("You cannot buy that.")
 
             if user_choice == "18":
-                if Coins.gold >= super_health_p.cost:
+                if Coins.coin_gold >= super_health_p.cost:
                     print("You bought the < SUPER HEALTH POTION >.")
                 else:
                     print("You cannot buy that.")
-
             print()
             print("---------------------------------------------------------------------------------------------------")
             print()
